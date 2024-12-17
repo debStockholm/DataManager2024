@@ -27,3 +27,5 @@ summa= x + y
 print(summa) 
 
 variabel1 = exempel push i GIT
+
+variabel_2 = exempel till GITHUB 
