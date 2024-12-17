@@ -23,3 +23,15 @@ print(type(y))
 exempel_GITHUB = 'denna fil'
 xh = 'exempel1'
 xy = 673
+
+
+variabel1 ='123'
+print(variabel1)
+
+y=2
+print(int(variabel1)*y)
+
+#numbers i Python
+exempelsiffra = 98.08
+exempelsiffra_ny=(int(exempelsiffra))
+print(exempelsiffra_ny)
