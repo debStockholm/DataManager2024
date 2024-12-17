@@ -129,9 +129,19 @@ print(nyVERS)   #print(ny variabel2)
 nygem = ersattning.lower()
 print(nygem)
 #--------------------- input funct (ta bort kommentar for att kora den)
-a = input('namn ')
-b = input('alder ')
-
+#a = input('namn ')
+#b = input('alder ')
 info = str(a) , int(b)
-text1 =(f'Hej {a}. Du ar {b} ar gammal').upper()
+text1 =(f'Hej {a}. Du ar {b} ar gammal').upper()  #f formatation
 print(text1)
+
+text2 = 'trying len function'
+nyforsok = text2.len()
+print(nyforsok)   #inte relevant
+
+#------------------------------ BOOLEAN
+
+#boolean_functions ink. TRUE and FALSE and operators AND, OR or NOT
+#AND = bade statements must be TRUE
+#OR = only one must be TRUE
+#NOT = 'inverting the meaning'
