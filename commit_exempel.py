@@ -24,4 +24,6 @@ x=10
 y=20
 
 summa= x + y
-print(summa)
+print(summa) 
+
+variabel1 = exempel push i GIT
