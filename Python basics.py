@@ -35,3 +35,23 @@ print(int(variabel1)*y)
 exempelsiffra = 98.08
 exempelsiffra_ny=(int(exempelsiffra))
 print(exempelsiffra_ny)
+
+#---------
+
+a = 3 + 2
+b = 26//3   #'hur manga ggr kan delas med jamnt nummer'
+b1 =28//3 
+b2 =27//3
+c = 5 % 2   #resten vid division
+d = 5 ** 2  #uppe till 2
+e = 5 ** 3  #uppe till 3
+
+
+print(a)
+print(b)
+print(b1)
+print(b2)
+
+print(c)
+print(d)
+print(e)
