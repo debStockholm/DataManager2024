@@ -1,2 +1,7 @@
 print("hello")
-print("h")gi
+
+
+saving = 'automatic savings'
+print(saving)
+
+
