@@ -78,12 +78,60 @@ print(tal1 + tal2)
 
 avrundat= (tal1 + tal2)/10
 print(avrundat)
-#-------------------------
 
-x = '15'
-y = '5'
-print(type(y))
-x1 =int(x)
-print(type(x1))
-summa = int(x) + int(y)
-print(f'summan ar {summa}')
+#----------------1--------- input: arbeta i terminalen (ta bort kommentar fran alla rader
+#  for att kora detta)
+
+#x = input('skriv tal ett:') #terminalfraga 1
+#y = input('skriv tal tva:') #terminalg
+#summa = int(x) + int(y)  #input resultat koverteras till heltal
+#print(f'summan ar: {summa}')  #anvands for concatenation av olika datatyper -t.ex str + variabel
+
+
+#----------------------    
+x = 42
+text = 'tal bor blivit en', str(x)
+print(text)
+
+
+#------------  index i strangar
+
+text = 'data science'
+print(text[0])  #hamtar del av strangen som ligger i den platsen inom []
+print(text[-1]) #'-1' hamtar sista tecket
+
+text = text.strip()
+print(text[0:6])  #hamta x-antal tecken
+
+#-------------strangfunktioner
+
+#upper() = koverterar strang till VERSALER
+#lower() = koverterar till gemener
+#strip() = delar strangen i mindre delar
+#replace() = ersatter en del med den andra
+#splin () = ta bort mellanslag
+#f = formatering; Lagger 'f' i borjan av strangen, och variabeln i {strangexempel}
+
+#--------
+
+text = 'Python ar roligt  '
+print(text)
+
+no_whitespace =text.strip() #varje funktion behover en ny variable - t.ex:no_whitespace
+print(no_whitespace) #efter print(variabeln)
+
+ersattning = no_whitespace.replace('roligt', 'fantastisk')  #skaffas ny variabel
+print(ersattning)   #print(nyvariabel)
+
+nyVERS = ersattning.upper()   #skapa ny variabel2
+print(nyVERS)   #print(ny variabel2)
+
+nygem = ersattning.lower()
+print(nygem)
+#--------------------- input funct (ta bort kommentar for att kora den)
+a = input('namn ')
+b = input('alder ')
+
+info = str(a) , int(b)
+text1 =(f'Hej {a}. Du ar {b} ar gammal').upper()
+print(text1)
