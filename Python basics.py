@@ -20,5 +20,6 @@ y = str(x)
 
 print(type(y))
 
-jffh = 909
-
+exempel_GITHUB = 'denna fil'
+xh = 'exempel1'
+xy = 673
