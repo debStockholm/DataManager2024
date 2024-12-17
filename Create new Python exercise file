@@ -1,0 +1,3 @@
+print('hej')
+saving = 'GitHub'
+print( 'hej' , saving)
