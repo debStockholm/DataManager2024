@@ -1,4 +1,3 @@
-
         #skriv ut varje tredje item
 reallyLongList = ["äpple", "banan", "körsbär", "druva", "apelsin", "päron", "kiwi", "mango", "passionsfrukt", "ananas"]
 for frukt in reallyLongList:
