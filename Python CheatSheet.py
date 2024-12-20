@@ -199,13 +199,13 @@ Använda 'try' och 'except'(catch i andra språk) för att fånga fel.
 I EXCEPT-raden kan programmerare ange vilket fel vill man felsoka.
 
 Om inget fel hittas, returneras ingenting;
-om fel HITTAS, returneras EXCEPT satsen
-FINALLY kör alltid en kod, oavsett om ett fel inträffade eller inte.'''
+om fel HITTAS, returneras EXCEPT satsen;
+FINALLY kör alltid en kod, oavsett om ett fel inträffade eller inte.
 
-#exempel
-#  |uncomment och kor:|
+exempel
+  |uncomment och kor:|
 
-'''try:
+try:
  x = int('hoppa') # Försöker konvertera en sträng till heltal
 except:
  print("Ett fel uppstod.")     #man kan INTE ha en string som en int
@@ -213,9 +213,50 @@ except:
 try:
   x = str(True) 
 except:
-  print("Ett fel uppstod.")    #man kan INTE ha en string som en bool'''
+  print("Ett fel uppstod.")    #man kan INTE ha en string som en bool
 
 try:
-  x = str(42) 
+  x = str(42)      #detta ar acceptabel????
 except:
-  print("Ett fel uppstod.")
+  print("Ett fel uppstod.")'''
+
+
+#--------------------------------------------DICTIONARIES
+'''
+Dictionaries lagrar data i par: nyckel + varde.
+Nyckelvarde gar att andra, men nyckelnamn ar immutabel.
+Man kan andra dictionaryes - lagga till, radera, ersatta
+Dessa {} kallar dictionaries
+'''
+#dictionaries funktioner:
+'''
+len()          hamtar antal element i dictionaries
+del            delete
+key()          hamtar antal nyckelvarden
+values()       hamtar antal varden
+items()        hamtar antal objekt inne i dictionary
+get            undviker fel om man saknar en nyckel
+'''
+
+
+'''exempel
+  |uncomment och kor:|
+
+produkt = {"namn": "laptop" , "pris": 10000, "lager":50}
+print(produkt)
+
+print(produkt["namn"])  #returnerar ett element i dictionary
+
+produkt.update({"kategori":'husvaror'})   #adderar ett nyckel varde i dictionary
+print(produkt)          #adderar ett nyckel varde i dictionary
+produkt['hylla'] = 12   #adderar ett nyckel varde i dictionary funkar ocksa
+
+produkt["lager"]= 40
+print(produkt)      #andrar ett varde i dictionary
+'''
+
+#loops i dictionaries:
+
+Farg ={'bla': "'kod12' , 'sai'", 'rod': 'kod 22', 'gron':'kod17'}
+for keys, farger, lii in Farg.items():
+ print(keys, farger, lii)
