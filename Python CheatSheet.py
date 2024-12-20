@@ -220,6 +220,13 @@ try:
 except:
   print("Ett fel uppstod.")'''
 
+#--------------------------------------------LISTOR
+
+
+# FYLLA PA -------------------- FYLLA PA  -------------- FYLLA PA--------------------- FYLLA PA
+
+#remove(), som delete, tar bort 
+
 
 #--------------------------------------------DICTIONARIES
 '''
@@ -234,7 +241,7 @@ len()          hamtar antal element i dictionaries
 del            delete
 key()          hamtar antal nyckelvarden
 values()       hamtar antal varden
-items()        hamtar antal objekt inne i dictionary
+items()        hamtar antal objekt inne i dictionary och delar nycklar fran varde.
 get            undviker fel om man saknar en nyckel
 '''
 
@@ -257,6 +264,20 @@ print(produkt)      #andrar ett varde i dictionary
 
 #loops i dictionaries:
 
-Farg ={'bla': "'kod12' , 'sai'", 'rod': 'kod 22', 'gron':'kod17'}
-for keys, farger, lii in Farg.items():
- print(keys, farger, lii)
+'''Farg ={'bla': "'kod12' , 'sai'", 'rod': 'kod 22', 'gron':'kod17'}
+for keys, farger in Farg.items():  #items gor det att programmet forstar den ska returnera nyckel och varde tillsammans
+ print(keys, farger)'''
+
+#----------------------------------------------TUPLER
+'''
+Tupler lagrar data i par: nyckel + varde.
+De ar immutabla, snabb ankomst
+Dessa () kallar tuplar
+'''
+'''exempel
+  |uncomment och kor:|
+tuppel =(3,5,1,9,7)
+print(len(tuppel))
+#tuppel[3] = 4         #kan inte andras
+#tuppel.(3, 8)
+'''
