@@ -192,6 +192,8 @@ Booleanvärden används ofta i if-satser och loopar'''
 
 ''' and, or, not  - eller en kombination an nagra/alla'''
 
+#input
+'''man kan fylla pa sjalv i terminalen'''
 
 #--------------------------------------FELHANTERING - TRY/EXCEPT + FINALLY
 '''
@@ -278,6 +280,33 @@ Dessa () kallar tuplar
   |uncomment och kor:|
 tuppel =(3,5,1,9,7)
 print(len(tuppel))
-#tuppel[3] = 4         #kan inte andras
-#tuppel.(3, 8)
+
+tuppel[3] = 4         #kan inte andras (does not support item assignments)
 '''
+
+
+#--------------------------------------------KONTROLLSTRUKTURER
+
+'''
+Reiterera fuktioner i programmering
+vanligast: 
+Villkor: if, else, elif
+Loopar: for, while
+Logiska uttryck: and, or, not 
+Dessa strukturer gor programmet dynamiskt
+'''
+
+#if/elif/else
+
+x=int(input('Skriv ett tal:')):
+
+if x > 0:   
+         print('positiv')
+elif x < 0:
+        print ('negativ')
+else:
+        print('lika med 0')  
+
+
+
+

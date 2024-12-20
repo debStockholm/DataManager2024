@@ -144,4 +144,4 @@ print(nyforsok)   #inte relevant
 #boolean_functions ink. TRUE and FALSE and operators AND, OR or NOT
 #AND = bade statements must be TRUE
 #OR = only one must be TRUE
-#NOT = 'giinverting the meaning'
+#NOT = 'inverting the meaning'
