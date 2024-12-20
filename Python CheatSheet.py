@@ -298,14 +298,25 @@ Dessa strukturer gor programmet dynamiskt
 
 #if/elif/else
 
-x=int(input('Skriv ett tal:')):
+'''
+x=int(input('Skriv ett tal:'))
 
 if x > 0:   
          print('positiv')
 elif x < 0:
         print ('negativ')
 else:
-        print('lika med 0')  
+        print('lika med 0') 
+        '''
+
+
+password = input('skriv ett losenord':)
+
+if password == 123456:
+ print('valkommen in') 
+
+#while password != 123456:
+ #password=input('Ange losenord:')
 
 
 
