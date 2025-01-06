@@ -1,6 +1,0 @@
-print('hej')
-saving = 'GitHub'
-print( 'hej' , saving)
-
-save1 ='saving savings'
-exempel = 1, 2, 3, 4
