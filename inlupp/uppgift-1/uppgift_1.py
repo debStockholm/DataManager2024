@@ -10,4 +10,6 @@ def is_odd(x:int) -> bool:
     else:
         return False
 
-print(is_odd(9))
+print(is_odd(9))    #OBS OBS OBS test kors alltid under textfilen!!!  dvs test-uppgift-1.py
+
+#kora test: pytest inlupp/uppgift-1/test-uppgift-1.py  , bara kopiera fran filern a sidan
