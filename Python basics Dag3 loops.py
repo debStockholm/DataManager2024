@@ -14,7 +14,9 @@ else:
 
 
 #--------------------WHILE
-x = 16
+'''x = 16
 while x > 15 and x <= 19:
   print(x)
-  x = x + 1  #OBS DETTA MASTE FINNAS, DEN BREAKAR LOOPEN! ANNARS LOOP BLIR OANDLIGT!
+  x = x + 1  #OBS DETTA MASTE FINNAS, DEN BREAKAR LOOPEN! ANNARS LOOP BLIR OANDLIGT!'''
+
+  

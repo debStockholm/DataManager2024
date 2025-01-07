@@ -6,18 +6,18 @@ Skapa en funktion is_odd(x) som returnerar True om x är udda och False om x är
 # Exempel: def is_odd(x: int) -> bool:
 # Förklaring: Funktionens namn är is_odd och tar en parameter x av datatypen int. Funktionen returnerar en bool.
 '''
-'''
+
 #ta bort kommentar!
 
-def uppgift1(x=int):   #-> boolean
-    x=4
+'''def is_odd(x=int):   #-> boolean
+    x=8
     if x%2 == 1:
           print(True)
     else:
          print(False)
 
-uppgift1()
-'''
+is_odd()'''
+
 
 #UPPGIFT 2
 #ta bort kommentar!
@@ -65,12 +65,12 @@ for x in range(10):
 '''Skapa en funktion filter_odd(numbers) som returnerar en lista med alla jämna tal från den givna listan.
 '''
 
-'''
-List_uppgift5 = [0, 17, 18, 19, 20, 21, 34, 37, 51, 54]
+
+'''List_uppgift5 = [0, 17, 18, 19, 20, 21, 34, 37, 51, 54]
 for x in List_uppgift5:
-    if x%2 == 1:
-        print(x)   #FUNKAR
-        '''
+    if x%2 == 0:
+        print(x)   #FUNKAR'''
+        
 #UPPGIFT 6 
 '''Skapa en funktion multiplication_table(n, limit) som returnerar multiplikationstabellen för n upp till limit i en lista.
 '''
@@ -79,20 +79,77 @@ for i in range(0, 18):
       List_uppgift6.append(i)
 
 for x in List_uppgift6:
-    if x*10 <= 70:
+    if x*2 <= 70:
       print(x, x*10)
     else: 
-      print(' too big to be printed')   #vad menas med multiplikationtabell?
-      '''
+      print(' too big to be printed')   #vad menas med multiplikationtabell?'''
+      
 
 #UPPGIFT 7
 '''Skapa en funktion validate_password(password) 
-som kontrollerar att lösenordet är minst 8 tecken långt och innehåller minst en siffra.'''
+som kontrollerar att lösenordet är minst 8 tecken långt och innehåller minst en siffra.
 
 Losenord_list = [input(str)]
 if len(Losenord_list) < 8:
-     print('Losenord behover minst 8 characthers')
+     print('Losenord behover minst 8 tecken')
 elif len(Losenord_list) == 8 and Losenord_list == str:
      print('need a number')
 else:
-      print('losenord accepterat')
+      print('losenord accepterat')'''
+
+#UPPGIFT 8 
+'''Räkna förekomsten av bokstäver
+
+Beskrivning
+Skapa en funktion count_letters(string) som returnerar en 
+dictionary med varje bokstav som nyckel och antalet förekomster som värde
+
+text_exempel = [input(str)]
+dictionary = {}
+
+for letters in text_exempel:
+     
+      if letters in dictionary:
+        dictionary[letters] = dictionary[letters] + 1
+        text_exempel.split(letters)
+      else:
+        dictionary[letters] = 1
+        text_exempel.split(letters)
+print(dictionary)     #FUNKAR - om inte input- SKAPA  funktion'''
+      
+            
+
+
+#UPPGIFT 9 
+'''Palindromkontroll
+
+Beskrivning
+Skapa en funktion is_palindrome(string) som kontrollerar 
+om en given sträng är ett palindrom (dvs. samma framifrån och bakifrån).'''
+
+'''exempel_string_pal = 'exempel string palindrome'
+print(exempel_string_pal)'''
+
+
+
+#palindrom
+
+#UPPGIFT 10
+
+'''Konvertera celsius till fahrenheit
+
+Beskrivning
+Skapa en funktion celsius_to_fahrenheit(celsius) som konverterar en temperatur från Celsius till Fahrenheit.'''
+
+#UPPGIFT 11
+'''Räkna orden i en text
+
+Beskrivning
+Skapa en funktion word_count(text) som returnerar antalet ord i en given text.'''
+
+#UPPGIFT 12
+'''Lagra data i en dictionary
+
+Beskrivning
+Skapa en funktion create_student_register(students) som tar emot en lista med namn och ålder och returnerar en dictionary
+ där namnet är nyckeln och åldern är värdet.'''
