@@ -23,13 +23,13 @@ is_odd()'''
 #ta bort kommentar!
 '''Skapa en funktion sum_list(numbers) som returnerar summan av alla siffror i listan
 
-List_uppgift = [1,6,8,9,15]
-print(sum(List_uppgift))      #FUNKAR
+sum_list= [1,6,8,9,15]
+print(sum(sum_list))      #FUNKAR
 
 def sum_list(List_uppgift:list):  #->int
    print(sum(List_uppgift)) ???????????  
 
-sum_list()  KOMPLETTERA!
+print(sum_list()  KOMPLETTERA!
 '''
 
 
@@ -51,7 +51,7 @@ print(max(List_uppgift3)) #FUNKAR!
 
 # Skapa en funktion fibonacci(n) som returnerar en lista med de första n Fibonacci-talen.
 
-'''Fibonacci_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+fibonacci_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 a = 0
 b = 1
 for x in range(10):
@@ -59,7 +59,7 @@ for x in range(10):
    print(x)
    a = b
    b = x
-   '''
+   
 
 #UPPGIFT 5
 '''Skapa en funktion filter_odd(numbers) som returnerar en lista med alla jämna tal från den givna listan.
