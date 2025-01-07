@@ -1,14 +1,7 @@
 # Uppgift 2
 # Skapa en funktion sum_list(numbers) som returnerar summan av alla siffror i listan.
 
-'''def sum_list(ls:list) -> int:
-   for x in ls:
-      sum += x
-   return sum
-
-print(sum_list([7, 8, 9]))'''
-
-def sum_list(ls:list) -> int:
+def sum_list(ls:list):
     return (sum(ls))
 
-print(sum_list([7, 8, 1, 9]))
+print(sum_list([5, 8, 1, 9]))
