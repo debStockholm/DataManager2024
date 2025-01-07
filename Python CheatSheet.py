@@ -310,13 +310,17 @@ else:
         '''
 
 
-password = input('skriv ett losenord':)
 
-if password == 123456:
- print('valkommen in') 
+#----------------------------------------------FUNKTIONER
+'''Funktioner ar ateranvandbara parametrar som utfor ett specifikt task. De kan sparas och anvandas om och om igen.
+De bor returnera NAGOT, men de kan ocksa returnera tomt'''
 
-#while password != 123456:
- #password=input('Ange losenord:')
+'''exempel: FUNKTION SOM PRINTAR SAMMA SAK'''
+
+def funktion_exampel():
+    print(namn)
+
+
 
 
 
