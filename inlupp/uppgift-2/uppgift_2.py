@@ -4,4 +4,5 @@
 def sum_list(ls:list):
     return (sum(ls))
 
-print(sum_list([5, 8, 1, 9]))
+print(sum_list([5, 8, 1, 9]))  #funkar
+
