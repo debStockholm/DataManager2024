@@ -51,14 +51,14 @@ print(max(List_uppgift3)) #FUNKAR!
 
 # Skapa en funktion fibonacci(n) som returnerar en lista med de första n Fibonacci-talen.
 
-fibonacci_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+'''fibonacci_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 a = 0
 b = 1
 for x in range(10):
    x = a + b
    print(x)
    a = b
-   b = x
+   b = x'''
    
 
 #UPPGIFT 5
@@ -153,3 +153,8 @@ Skapa en funktion word_count(text) som returnerar antalet ord i en given text.''
 Beskrivning
 Skapa en funktion create_student_register(students) som tar emot en lista med namn och ålder och returnerar en dictionary
  där namnet är nyckeln och åldern är värdet.'''
+
+text_exempel ='text exempel'
+
+for x in text_exempel:
+      print(x)
