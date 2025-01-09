@@ -6,7 +6,7 @@ def celsius_to_fahrenheit(tempC:int):
     Temp_F = tempC*1.8 + 32
     return round(Temp_F, 2)
 
-print(celsius_to_fahrenheit(6)) 
+print(celsius_to_fahrenheit(6))   #ok!
 
 
 def celsius_to_fahrenheit_2(tempC2:list):
@@ -14,4 +14,4 @@ def celsius_to_fahrenheit_2(tempC2:list):
       Temp_F2 = tempC2*1.8 + 32
     return round(Temp_F2, 2)
 
-print(celsius_to_fahrenheit([9, 6, 3, 12, 15])) 
+print(celsius_to_fahrenheit([9, 6, 3, 12, 15]))    #come farla funzionare fcon una lista di temperature?
