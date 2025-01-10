@@ -2,13 +2,10 @@
 # Skapa en funktion word_count(text) som returnerar antalet ord i en given text.
 
 def word_count(text_ex:str):
-   split_line = text_ex.split()   #altri metodi?    #1 step: dividere string in parole con split
-   count = 0                                        #2 step creare variabile conunt per salvare i risultati
-   for x in split_line:                             #3 step: for loop che aggiunge 1 per ogni parola contata
-     count += 1
-   return count
+   split_line = text_ex.split("o w")   #altri metodi?    #1 step: dividere string in parole con split
+   return len(split_line)
    
-print(word_count('hello worlll'))  #funkar
+print(word_count('hello worlll fdde'))  #funkar
 
 '''def word_count2(ex2:str):
    string_divided = ex2.split()
