@@ -3,7 +3,7 @@
 
 def count_letters(x:str):                      #dictionary: {'A':'8', 'B': '6'}
     dictionary_upp = {}                        #1 step: apro funzione dictionary da completare - come fare?
-    bokstav_count = 0                                #x['bokstav']= '5', per aggiungere temrini in dict
+    bokstav_count = 0                                #x['bokstav']= '5', per aggiungere termini in dict
     for bokstav in x:
        if bokstav in dictionary_upp == 0:      #2 step: aggiungere i valori di x:str al dizionario (for loop?)
           return dictionary_upp['bokstav'] = ''

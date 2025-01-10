@@ -2,7 +2,7 @@
 # Uppgift 4
 # Skapa en funktion fibonacci(n) som returnerar en lista med de första n Fibonacci-talen.
 
-def test_fibonacci(n:int):
+def fibonacci(n:int):
    a = 0
    b = 1
    ny_list =[]
@@ -20,5 +20,5 @@ def test_fibonacci(n:int):
          ny_list.append(c)
       return ny_list
       
-print(test_fibonacci(10))
+
    
