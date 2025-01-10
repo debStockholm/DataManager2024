@@ -8,4 +8,4 @@ def is_palindrome(x:str):
     else:                                #altri modi per risolvere?
             return False
 
-print(is_palindrome(''))     #il programma funziona, ma risultato : 'test failed?'
+print(is_palindrome('raddewar'))     #il programma funziona, ma risultato : 'test failed?'
