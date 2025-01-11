@@ -4,4 +4,4 @@
 def max_in_list(maxtal:int):
     return (max(maxtal))
 
-#print(max([9, 8, 45]))
+#funkar, men kan ej testa
