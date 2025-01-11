@@ -9,7 +9,7 @@ def multiplication_table(x: int, y:int):
   for num in range(1, y + 1):    #num appartiene a 'y'
     res= num*x
     list_g.append(res)
-  return list_g                  #return sotto for per contare tutto
+  return list_g                  
     
 
     
