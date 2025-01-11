@@ -11,8 +11,6 @@ def count_letters(x:str):                      #dictionary: {'A':'8', 'B': '6',}
          dictionary_upp[bokstav] += 1                   #om en boksav finns i dict: count + 1
     return dictionary_upp
 
-print(count_letters('ouhjkytdddre'))               
-
       
 
     
