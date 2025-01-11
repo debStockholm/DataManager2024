@@ -1,13 +1,18 @@
-# Uppgift 8
-# Skapa en funktion count_letters(string) som returnerar en dictionary med varje bokstav som nyckel och antalet förekomster som värde.
+#uppgift 8
+# Skapa en dict som innehaller samtliga bokstaver av en text med bokstav som nyckel och antal som varde.
 
-def count_letters(x:str):                      #dictionary: {'A':'8', 'B': '6'}
-    dictionary_upp = {}                        #1 step: apro funzione dictionary da completare - come fare?
-    bokstav_count = 0                                #x['bokstav']= '5', per aggiungere termini in dict
-    for bokstav in x:
-       if bokstav in dictionary_upp == 0:      #2 step: aggiungere i valori di x:str al dizionario (for loop?)
-          return dictionary_upp['bokstav'] = ''
-       while bokstav in dictionary_upp:        #3 step: quando una letters e presente nel dict, aggiornare il count
-        return bokstav_count =+ 1                #help!
 
-print(count_letters('exit'))
+def count_letters(x:str):                      #dictionary: {'A':'8', 'B': '6',}
+    dictionary_upp = {}                        #1 step: skapa en variabel som innehaller den nya dict {dictionary_upp} 
+    for bokstav in x:                          #tillaga varde i en: {} dict['bokstav']= 'x'
+        if bokstav not in dictionary_upp:        #2 step: kora for loop genom den givna input string 
+         dictionary_upp[bokstav] = 1           #om en bokstav ej fanns i dict: tillags
+        else: 
+         dictionary_upp[bokstav] += 1                   #om en boksav finns i dict: count + 1
+    return dictionary_upp
+
+print(count_letters('ouhjkytdddre'))               
+
+      
+
+    
