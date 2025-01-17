@@ -7,7 +7,7 @@ def fibonacci(n:int):
    b = 1
    ny_list =[]
    if n == 0:
-      return ny_list             #skaffade en lista for de nya tal
+      return ny_list           #skaffade en lista for de nya tal
    elif n==1:
       return [0]
    else:
@@ -20,6 +20,6 @@ def fibonacci(n:int):
          ny_list.append(c)
       return ny_list
 
-print(fibonacci(15))
+print(fibonacci(1))
       
 #------------------fibonacci med rekursion
