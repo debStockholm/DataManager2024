@@ -51,7 +51,7 @@ else:
 print(f'{deb} reply back:')
 
 print('Thank you for your time' + ' and')
-Weekend_approach = True     
+Weekend_approach = True     #change bool according to preferences
 
 for greeting in range(3):
     if Weekend_approach:
