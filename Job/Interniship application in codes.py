@@ -14,8 +14,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 Best_candidate = {
-    'Skills': ['Python', 'SQL', 'ProjectManagement' , 'Humor', 'ChatGPT', 'GitHub', 'Rail infrastructure designing', 'Brings sweets to office', 'Mind her own business' ],
-    'On a scale from 1 to 10': [3, 5,-5, 10, 8,-2, 7, 20, 9]
+    'SKILLS': ['Python', 'PostGreSQL', 'Neverending WHILE-loops' , 'ChatGPT', 'GitHub', 'Rail engineering', 'Brings sweets to office', 'Mind her own business' ],
+    'ON A SCALE FROM 1 TO 10': [3, 5, 7, 6,-2, 7, 20, 9]
 }
 
 best_cand=pd.DataFrame(Best_candidate)
@@ -23,10 +23,10 @@ best_cand.to_csv('best candidate application.csv', index = False)
 
 
 Best_best= pd.read_csv('best candidate application.csv')
-Best_of_the_best = Best_best.sort_values(by= 'On a scale from 1 to 10', ascending =True)
+Best_of_the_best = Best_best.sort_values(by= 'ON A SCALE FROM 1 TO 10' , ascending =True)
 print(Best_of_the_best)
 
-sns.barplot(data= Best_of_the_best, x='Skills', y = 'On a scale from 1 to 10')
+sns.barplot(data= Best_of_the_best, x='SKILLS', y = 'ON A SCALE FROM 1 TO 10')
 plt.title('Debora the best candidate:')
 plt.show()
 #close Plot to keep on running code:
@@ -61,9 +61,9 @@ for greeting in range(3):
 
 
 
-print('Do you think my code is terrible? You should see my PM skills then! Reach me out if you wanna know more, or show me how to do best! :-)')
+print('DO YOU THINK MY CODE IS TERRIBLE? I CAN ACTUALLY DO WORSE! Reach me out if you wanna know more, or show me how to do best! :-)   :-)')
 #OBS
 print(f'({deb} has some humor)')
 
 
-#committed and pushed
+#committed and pushed   --- done?
