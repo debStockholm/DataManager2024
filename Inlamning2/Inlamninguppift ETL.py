@@ -45,14 +45,45 @@ print(cleaned_data_2)
 #jag vill visa matsvinnstrend jamforelse over tid. Da tar jag bort de raderna dar den ena och bade varde ar NaN:
 
 cleaning_data_3 = cleaned_data_2.dropna(subset=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari','Kökssvinn(i kg) mars'])
-print(cleaning_data_3.head(60))   
+#print(cleaning_data_3.head(60))   
 
 cleaning_data_3['Matsvinn forandring jan-feb i %']= (cleaning_data_3['Kökssvinn(i kg) februari'] - cleaning_data_3['Kökssvinn(i kg) januari'])/cleaning_data_3['Kökssvinn(i kg) januari'] * 100
-cleaning_data_3['Matsvinn forandring feb-mar i %']= (cleaning_data_3['Kökssvinn(i kg) mars'] - cleaning_data_3['Kökssvinn(i kg) februari'])/cleaning_data_3['Kökssvinn(i kg) februari'] * 100
+cleaning_data_3['Matsvinn forandring feb-mars i %']= (cleaning_data_3['Kökssvinn(i kg) mars'] - cleaning_data_3['Kökssvinn(i kg) februari'])/cleaning_data_3['Kökssvinn(i kg) februari'] * 100
+cleaning_data_3['Matsvinn forandring jan-mars i %']= (cleaning_data_3['Kökssvinn(i kg) mars'] - cleaning_data_3['Kökssvinn(i kg) januari'])/cleaning_data_3['Kökssvinn(i kg) januari'] * 100
 cleaning_data_3['Matsvinn forandring jan-feb i %'] = cleaning_data_3['Matsvinn forandring jan-feb i %'].astype(int) 
-cleaning_data_3['Matsvinn forandring feb-mar i %'] = cleaning_data_3['Matsvinn forandring feb-mar i %'].astype(int) 
+cleaning_data_3['Matsvinn forandring feb-mars i %'] = cleaning_data_3['Matsvinn forandring feb-mars i %'].astype(int) 
+cleaning_data_3['Matsvinn forandring jan-mars i %'] = cleaning_data_3['Matsvinn forandring jan-mars i %'].astype(int) 
+
 print(cleaning_data_3)
+#selc= cleaning_data_3[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari', 'Kökssvinn(i kg) mars', 'Matsvinn forandring jan-mars i %', 'Matsvinn forandring jan-feb i %', 'Matsvinn forandring feb-mars i %']]
+#print(selc)
 #print(cleaning_data_3.dtypes)
+
+# ny_dataset_for_graphs = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-mars i %'] > 0 & 
+#                               cleaning_data_3['Matsvinn forandring jan-mars i %'] < 15]
+# print(ny_dataset_for_graphs)
+
+# cleaning_data_3['Medel_matsvinn_utveckl. %']= cleaning_data_3[['Matsvinn forandring jan-feb i %', 'Matsvinn forandring feb-mar i %']].agg('mean', axis =1)
+# print(cleaning_data_3)
+# filter_for_graphs = cleaning_data_3['Matsvinn forandring jan-mars i %']
+# data_for_graphs = filter_for_graphs[(filter_for_graphs > 0) & (filter_for_graphs < 15)]
+# print(data_for_graphs)
+   
+# # aggregation_februari= cleaning_data_3['Kökssvinn(i kg) februari'].agg(['sum', 'mean', 'min', 'max'])
+
+# sns.barplot(data= cleaning_data_3, data_for_graphs, x='Enhet', y = data_for_graphs)
+# plt.title('preliminar linjeplot')
+# plt.show()
+
+#filtering= cleaning_data_3['']
+'''cleaning_data_3.sort_values(by='', ascending= FAlse/true)'''
+'''df.agg(func, axis=1, *args, **kwargs)'''
+# matsvinn_okning = cleaning_data_3['Matsvinn forandring feb-mar i %'] > cleaning_data_3['Matsvinn forandring jan-feb i %']
+# matsvinn_minskning = cleaning_data_3['Matsvinn forandring feb-mar i %'] < cleaning_data_3['Matsvinn forandring jan-feb i %
+
+
+
+
 # #skapar agg() fuktion for insikter om matsvinn hos Sodertalje forskolor i januari samt februari:
 
 # aggregation_januari= cleaning_data_3['Kökssvinn(i kg) januari'].agg(['sum', 'mean', 'min', 'max'])
