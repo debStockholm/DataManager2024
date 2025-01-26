@@ -64,7 +64,7 @@ gauss = np.random.normal(0,1,100)
 print(gauss)
 
 sns.histplot(gauss, kde=True)   #labels è un'impostatzione di matplot
-plt.title('Total earning from sales') #ctrl + k  , ctrl + c per commentare tutto
+plt.title('Total earning from sales') #ctrl + k  , ctrl + c per commentare tutto oppur k + u per 'scommentare'
 
 # # Display the plot 
 plt.show()
