@@ -14,65 +14,44 @@ ny_df = pd.DataFrame(data=df)
 ny_df2= pd.DataFrame(data=df2)
 #print(ny_df.head(), ny_df2.head())
 
-#Ta fram en lista av alla kolumner:
 
-columns = ny_df.columns
+#Ta fram en lista av alla kolumner av bada dataset:
+
+'''columns = ny_df.columns
 for column in columns:
      print(column) 
 
 columns2 = ny_df2.columns
 for column1 in columns2:
-     print(column1) 
+     print(column1) '''
 
 #_____________________________________TRANSFORM________________________________________
 
+#merging de tva dataset
 merging_files= pd.merge(ny_df, ny_df2, on = 'Enhet', how = 'outer')
-print(merging_files)
-
-removed_columns= 'Kategori_x', 'Kategori_y', 'År'
-cleaning_columns = merging_files.drop(['Kategori_x', 'Kategori_y', 'År_x'], axis=1)
-print(cleaning_columns)  #piu o meno funziona
-
-# # cleaning_2 = cleaning_columns.drop([column for column in cleaning_columns.columns if 'Kontor' in column], axis=1)  #working
-# # print(cleaning_2.head) 
-
-# # print(cleaning_2.columns)     #working, now I can work with only datas for 'Lokal'
-
-# # lokales_data= pd.DataFrame(data=cleaning_2)
-
-# # kolumner = cleaning_2.columns
-# # for column in kolumner:
-# #      print(column)
-
-# # print(lokales_data)
-
-# cleaning_2 = pd.DataFrame([K, 2019, 1668421,
-
-# ])
-
-# # print(cleaning_columns.columns)
-# # print("ok thats working, residens columns removed")    # work so far.
+'''print(merging_files)'''
+cleaned_data = merging_files.rename(columns={'År_y': 'År', 'Kökssvinn(i kg)_x':'Kökssvinn(i kg) januari', 'Kökssvinn(i kg)_y':'Kökssvinn(i kg) februari'})
 
 
-# #ta bort ytterligare kolumner (kontorkolumner):
-
-# # tabort_ord = 'kontor'
-# # cleaning_columns2 = cleaning_columns.drop([column for columns2 in cleaning_columns.columns if tabort_ord in column], axis=1)
-# # print(cleaning_columns2.head(5))
-
+#byta namn till kolumner och spara enbart de mest relevanta
+cleaned_data_2 =cleaned_data.drop(['Kategori_x', 'Kategori_y', 'Månad_x', 'Månad_y', 'År_x'], axis=1)
+cleaned_data_2['År'] = cleaned_data_2['År'].astype('Int64')  #Int64 function to handle a float column with some Nan (I dont wanna fill it)
+'''#print(cleaned_data_2.head(50)) '''
 
 
+#jag vill visa matsvinnstrend jamforelse over tid. Da tar jag bort de raderna dar den ena och bade varde ar Nan:
+cleaning_data_3 = cleaned_data_2.dropna(subset=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari'])
+'''print(cleaning_data_3.head())'''   
 
-# # tabort_Lokal = 'Lokal'
-# # tabort_lokal = 'lokal'
-
-# # cleaning_columns2 = ny_df.drop([column for column in cleaning_columns.columns if tabort_Lokal in column], axis=1)
-# # print(cleaning_columns2.head(5))
-
-# # print("removed columns with 'Lokal' ")
-# # cleaning_columns3 = ny_df.drop([column for column in cleaning_columns2.columns if tabort_lokal in column], axis=1)
-# # print(cleaning_columns3.head(10))
-# # print("removed columns with 'lokal' ")
+cleaning_data_3['Matsvinn utveckling i kg'] = cleaning_data_3['Kökssvinn(i kg) februari'] - cleaning_data_3['Kökssvinn(i kg) januari']
+cleaning_data_3['Matsvinn forandring i %']= (cleaning_data_3['Kökssvinn(i kg) februari'] - cleaning_data_3['Kökssvinn(i kg) januari'])/cleaning_data_3['Kökssvinn(i kg) januari'] * 100
+cleaning_data_3['Matsvinn forandring i %'] = cleaning_data_3['Matsvinn forandring i %'].astype(int) 
+print(cleaning_data_3)
 
 
-# #print(dataam)'''
+#skapar agg() fuktion for insikter om matsvinn hos Sodertalje forskolor i Januari samt februari:
+
+aggregation_januari= cleaning_data_3['Kökssvinn(i kg) januari'].agg(['sum', 'mean', 'min', 'max'])
+aggregation_februari= cleaning_data_3['Kökssvinn(i kg) februari'].agg(['sum', 'mean', 'min', 'max'])
+
+print(aggregation_januari.round(1), aggregation_februari.round(1))
