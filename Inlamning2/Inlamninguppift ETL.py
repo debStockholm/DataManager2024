@@ -45,30 +45,41 @@ cleaned_data_2 = cleaned_data.rename(columns={'Kökssvinn(i kg)_x':'Kökssvinn(i
 cleaning_data_3 = cleaned_data_2.dropna(subset=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari'])
 #print(cleaning_data_3.head(60))   
 cleaning_data_3['Kökssvinn(i kg) skillnad']= (cleaning_data_3['Kökssvinn(i kg) februari'] - cleaning_data_3['Kökssvinn(i kg) januari'])
-cleaning_data_3['Kökssvinn(i kg) skillnad']= cleaning_data_3['Kökssvinn(i kg) skillnad'].astype(int)
+cleaning_data_3['Kökssvinn(i kg) skillnad']= cleaning_data_3['Kökssvinn(i kg) skillnad'].astype(float)
 cleaning_data_3['Matsvinn forandring jan-feb i %']= (cleaning_data_3['Kökssvinn(i kg) februari'] - cleaning_data_3['Kökssvinn(i kg) januari'])/cleaning_data_3['Kökssvinn(i kg) januari'] * 100
 cleaning_data_3['Matsvinn forandring jan-feb i %'] = cleaning_data_3['Matsvinn forandring jan-feb i %'].astype(int) 
 
 cleaning_data_3['Kökssvinn(i kg) januari'] = cleaning_data_3['Kökssvinn(i kg) januari'].astype(float)
 cleaning_data_3['Kökssvinn(i kg) februari'] = cleaning_data_3['Kökssvinn(i kg) februari'].astype(float)
-print(cleaning_data_3.head())
+#print(cleaning_data_3.head())
+Koksvinn_highest= cleaning_data_3.sort_values(by= 'Kökssvinn(i kg) skillnad', ascending=False).head(5)
+print(Koksvinn_highest)
+Koksvinn_lowest = cleaning_data_3.sort_values(by= 'Kökssvinn(i kg) skillnad', ascending = True).head(5)
+print(Koksvinn_lowest)
+# print(cleaning_data_3.dtypes)
+#  # filtrerar ut data for att skapa en mindre graf - valjer enbar de enheter som hade liten andel matsvinnsforandring
+# data_graph = cleaning_data_3[(cleaning_data_3['Kökssvinn(i kg) skillnad'] > 0) & (cleaning_data_3['Kökssvinn(i kg) skillnad'] <= 2)]
+# #print(data_graph)
+# data_graph_2 = cleaning_data_3.sort_values(by='Kökssvinn(i kg) januari', ascending=False).head(3)
+# print(data_graph_2)
 
-print(cleaning_data_3.dtypes)
-#skapar agg() fuktion for insikter om matsvinn hos Sodertalje forskolor i januari och februari:
 
-aggregation= cleaning_data_3[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari']].agg('mean')
-print(aggregation)
-aggregation_2=cleaning_data_3[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari']].agg('sum')
-# Restructure the aggregation result to a DataFrame
-aggregation_ny_df = (aggregation, aggregation_2).reset_index()
-aggregation_ny_df.columns = ['M', 'Medelvarde']  
 
-# Create the line plot
-sns.scatterplot(data=aggregation_ny_df, x='M', y='Medelvarde')
+##skapar agg() fuktion for insikter om matsvinn hos Sodertalje forskolor i januari och februari:
 
-# Display the plot
-plt.show()
+#Skapa lineplot
+# 
+# sns.scatterplot(data=data_graph, x='Enhet', y='Kökssvinn(i kg) januari')
+# plt.title('Matsvinn for forskolor som hade liten matsvinn forandring mellan januari och februari')
+# plt.show()
 
+# sns.scatterplot(x='Enhet', y='Kökssvinn(i kg) januari', data=data_graph, label='Januari', color='blue')
+# sns.scatterplot(x='Enhet', y='Kökssvinn(i kg) februari', data=data_graph, label='Februari', color='orange')
+# plt.title('Matsvinn forandring jan/feb')
+# plt.show()
+
+'''Samtliga skolor som hade en liten mandg matsvinn forandring (0-2kg kg) mellan jan-feb har registrerat en valdigt lite 
+okning i matsvinn i februari. Kan bero pa att i januari har forskolor varit stangda i nagra dagar? '''
 
 # def matsvinn_januari(cleaning_data_3):
 #      for x in cleaning_data_3['Kökssvinn(i kg) januari']:
