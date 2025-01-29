@@ -47,70 +47,91 @@ cleaning_data_3['Kökssvinn(i kg) skillnad']= (cleaning_data_3['Kökssvinn(i kg)
 cleaning_data_3['Kökssvinn(i kg) skillnad']= cleaning_data_3['Kökssvinn(i kg) skillnad'].astype(float)
 cleaning_data_3['Matsvinn forandring jan-feb i %']= (cleaning_data_3['Kökssvinn(i kg) februari'] - cleaning_data_3['Kökssvinn(i kg) januari'])/cleaning_data_3['Kökssvinn(i kg) januari'] * 100
 cleaning_data_3['Matsvinn forandring jan-feb i %'] = cleaning_data_3['Matsvinn forandring jan-feb i %'].astype(int) 
-#se till att samtliga kolumner ar i nagin numeric form:
 
-cleaning_data_3['Kökssvinn(i kg) januari'] = cleaning_data_3['Kökssvinn(i kg) januari'].astype(float)
-cleaning_data_3['Kökssvinn(i kg) februari'] = cleaning_data_3['Kökssvinn(i kg) februari'].astype(float)
+#print(cleaning_data_3.dtypes)
 #print(cleaning_data_3.head())
 
 
 #skapar en agg() sortering for 'key' insikter om matsvinn hos Sodertalje forskolor i januari och februari:
 
 matsvinn_keyvalues=cleaning_data_3.agg({'Kökssvinn(i kg) januari':['sum','mean', 'max','min'], 'Kökssvinn(i kg) februari': ['sum','mean', 'max', 'min']})
+matsvinn_keyvalues[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari']] = matsvinn_keyvalues[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari']].round(2).astype(int)
 print(matsvinn_keyvalues)
-
 
 
 # Filtrerar ut data for att skapa en mindre graf, men det gar att koraa pa samtliga 'Enheter'.
 
 # 1.stort negativt matsvinn forandring: skolor som slandge 40% + mat i februari jmf med januari:
 print('NEGATIV UTVECKLING ---> mer matsvinn')
-positive_values = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %'] > 0]
+positive_values = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %'] > 40]
 neg_matsvinn_utv= positive_values.sort_values(by='Matsvinn forandring jan-feb i %', ascending= False)
-Ny_data_graph = neg_matsvinn_utv.head(5)
-#print(neg_matsvinn_utv.head(5))  #funkar
+Ny_data_graph = neg_matsvinn_utv
+#print(Ny_data_graph)  #funkar
 
-#--------------------------------------------------------------------------------------------
-#mest positiva matsvinn forandring: skolor som slandge 30% + mindre mat i februari jmf med januari
+# --------------------------------------------------------------------------------------------
+# 2. mest positiva matsvinn forandring: skolor som slandge 40% + mindre mat i februari jmf med januari
+
 print('POSITIV UTVECKLING ---> mindre matsvinn')
-neg_values = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %']  < 0]
+neg_values = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %']  < -30 ]
 pos_matsvinn_utv= neg_values.sort_values(by='Matsvinn forandring jan-feb i %', ascending = True)
-Ny_data_graph_2 = pos_matsvinn_utv.head(5)
-#print(pos_matsvinn_utv.head(10))
+Ny_data_graph_2 = pos_matsvinn_utv
+#print(Ny_data_graph_2)
+
+
+Max_= cleaning_data_3['Matsvinn forandring jan-feb i %'].max()
+print(f'hogst matsvinn forandring:{Max_}')
+
+Minim_= cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %'] > 0]['Matsvinn forandring jan-feb i %'].min()
+print(f'Lagst matsvinn forandring:{Minim_}')
+
+
+Ny_data_graph_3= pd.DataFrame({
+      'Typ av varde': ['Max % matsvinn', 'Min % matsvinn'],
+       'varde': [Max_, Minim_]
+ })
+print(Ny_data_graph_3)
+#_-----------------------GRAPH
+
+# neg_utveckling = Ny_data_graph.melt(id_vars=['Enhet'], value_vars=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari'], 
+# var_name='Månad', value_name='Kökssvinn (i kg)')
+
+# sns.catplot(data=neg_utveckling, x='Enhet', y='Kökssvinn (i kg)', hue='Månad', kind='bar', dodge=True, height=8, aspect=1)
+
+# plt.title("Jämförelse av kökssvinn i januari och februari")
+# plt.suptitle('Top 5 forskolor som okade deras matsvinn fran januari till februari med en skillnad av + 40%')
+# plt.xlabel("Enhet")
+# plt.ylabel("Kökssvinn (i kg)")
+# plt.show()
 
 
 
-neg_utveckling = Ny_data_graph.melt(id_vars=['Enhet'], value_vars=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari'], 
- var_name='Månad', value_name='Kökssvinn (i kg)')
+# sns.lineplot(data=Ny_data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) januari', color = 'orange', marker='o' , label = 'januari')
+# sns.lineplot(data=Ny_data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) februari', color = 'green', marker= 'o' , label = 'februari')
+# plt.title("Jämförelse av kökssvinn i januari och februari")
+# plt.suptitle('Top 5 forskolor som minskade deras matsvinn fran januari till februari med en skillnad pa +30%')
+# plt.xlabel("Enhet")
+# plt.ylabel("Kökssvinn (i kg)")
+# plt.show()
 
-sns.catplot(data=neg_utveckling, x='Enhet', y='Kökssvinn (i kg)', hue='Månad', kind='bar', dodge=True, height=8, aspect=1)
-
-plt.title("Jämförelse av kökssvinn i januari och februari")
-plt.suptitle('Top 5 forskolor som okade deras matsvinn fran januari till februari med en skillnad av + 40%')
-plt.xlabel("Enhet")
-plt.ylabel("Kökssvinn (i kg)")
+sns.scatterplot(x='Enhet', y='Matsvinn forandring jan-feb i %', data=Ny_data_graph, palette='deep')
+sns.scatterplot(x='Enhet', y='Matsvinn forandring jan-feb i %', data=  Ny_data_graph_2, palette = 'light')
+sns.lineplot(x='Enhet', y='Matsvinn forandring jan-feb i %', data=Ny_data_graph, color= 'blue', linewidth = 3)
+sns.lineplot(x='Enhet', y='Matsvinn forandring jan-feb i %', data=Ny_data_graph_2, color= 'green', linewidth = 3)
+plt.title('Scatterexempel')
 plt.show()
 
 
 
-sns.lineplot(data=Ny_data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) januari', color = 'orange', marker='o' , label = 'januari')
-sns.lineplot(data=Ny_data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) februari', color = 'green', marker= 'o' , label = 'februari')
-plt.title("Jämförelse av kökssvinn i januari och februari")
-plt.suptitle('Top 5 forskolor som minskade deras matsvinn fran januari till februari med en skillnad pa +30%')
-plt.xlabel("Enhet")
-plt.ylabel("Kökssvinn (i kg)")
+# # Customizing labels and title
+# plt.xlabel('X Axis Label')
+# plt.ylabel('Y Axis Label')
+# plt.title('Custom Scatter Plot')
 
-plt.show()
+# # Adding a grid
+# plt.grid(True)
 
-
-# # sorting_matsvinn_data= cleaning_data_3.sort_values(by='Kökssvinn(i kg) januari', ascending=True)
-# # print(sorting_matsvinn_data)
-# # print(cleaning_data_3['Kökssvinn(i kg) januari'].head(10))
-
-
-# # sns.lineplot(data= cleaning_data_3, x= 'Kökssvinn(i kg) januari', y = 'Kökssvinn(i kg) februari')
-# # plt.show()
-
+# # Show the plot
+# plt.show()
 
 
 
