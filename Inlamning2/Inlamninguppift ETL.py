@@ -68,7 +68,13 @@ print('NEGATIV UTVECKLING ---> mer matsvinn')
 positive_values = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %'] > 40]
 neg_matsvinn_utv= positive_values.sort_values(by='Matsvinn forandring jan-feb i %', ascending= False)
 Ny_data_graph = neg_matsvinn_utv
-print(Ny_data_graph)  #funkar
+#print(Ny_data_graph)  #funkar
+
+'''new_v= cleaning_data_3.loc[(cleaning_data_3['Matsvinn forandring jan-feb i %'] > 8) & (cleaning_data_3['Matsvinn forandring jan-feb i %']<20)]
+print(new_v)'''  #sempre specificare colonna --- controlla parentesi
+
+print("Press enter to continue...")
+input()
 
 # --------------------------------------------------------------------------------------------
 # 2. mest positiva matsvinn forandring: skolor som slandge 40% + mindre mat i februari jmf med januari
@@ -77,7 +83,8 @@ print('POSITIV UTVECKLING ---> mindre matsvinn')
 neg_values = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %']  < -30 ]
 pos_matsvinn_utv= neg_values.sort_values(by='Matsvinn forandring jan-feb i %', ascending = True)
 Ny_data_graph_2 = pos_matsvinn_utv
-print(Ny_data_graph_2)
+#print(Ny_data_graph_2)
+
 
 
 # Max_= cleaning_data_3['Matsvinn forandring jan-feb i %'].max()
