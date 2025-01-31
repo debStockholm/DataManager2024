@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn import linear_model
+from sklearn.cluster import KMeans
 import pandas as pd
 import matplotlib.pyplot as plt 
 
@@ -34,7 +35,7 @@ predic_on_y = linear_data.predict(x_axis)
 
 
 
-plt.scatter(x,y, color ='red')
+plt.scatter(x,y, color ='')
 plt.plot(x_axis, predic_on_y, color = 'green')
 plt.title('regression example')
 # plt.xlabel
