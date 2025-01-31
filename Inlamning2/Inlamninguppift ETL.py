@@ -107,7 +107,7 @@ plt.xlabel("Enhet")
 plt.ylabel("Kökssvinn (i kg)")
 plt.show()
 
-
+Ny_data_graph.to_csv('Dataframe 1', index=False)
 
 sns.lineplot(data=Ny_data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) januari', color = 'orange', marker='o' , label = 'januari')
 sns.lineplot(data=Ny_data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) februari', color = 'green', marker= 'o' , label = 'februari')
@@ -116,6 +116,9 @@ plt.suptitle('Top 5 forskolor som minskade deras matsvinn fran januari till febr
 plt.xlabel("Enhet")
 plt.ylabel("Kökssvinn (i kg)")
 plt.show()
+
+
+Ny_data_graph_2.to_csv('Dataframe 2', index=False)
 
 #___ny merge for scatterplot______________________joinar tva till dataset
 
@@ -148,7 +151,7 @@ value_vars=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari', 'Kökssvinn
 var_name='Månad',
 value_name='Kökssvinn (kg)')
 merging_data.columns=['Aggregat_typ', 'Månad', 'Kökssvinn (kg)']
-#print(merging_data)
+print(merging_data)
 
 
 #_____________________________________SCATTERPLOT
@@ -179,7 +182,8 @@ plt.ylabel('Månad')
 plt.show()
 
 
+merging_2.to_csv('gen_feb_mar_apr.csv', index=False)
 
-df.to_csv('fil_namn', index=False) #spara!
+merging_data.to_csv('Dataframe 3 merged.csv', index=False) #spara!
 
 #DEVO FARE DUE SALVATAGGI QUA?
