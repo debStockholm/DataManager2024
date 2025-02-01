@@ -15,7 +15,7 @@ df = pd.read_csv('Inlamning2\Rapportering svinn förskola januari.csv')
 df2= pd.read_csv('Inlamning2\Rapportering svinn förskola februari.csv')
 df3= pd.read_csv('Inlamning2\Rapportering svinn förskola mars.csv')
 df4= pd.read_csv('Inlamning2\Rapportering svinn förskola april.csv')
-print(df,df2, df3, df4)
+#print(df,df2, df3, df4)
 
 
 '''
@@ -37,13 +37,13 @@ merging_files= pd.merge(df, df2, on = 'Enhet', how = 'outer')
 #byta namn till kolumner och spara enbart de mest relevanta - drop allt annat:
 cleaned_data =merging_files.drop(['Kategori_x', 'Kategori_y', 'Månad_x', 'Månad_y', 'År_x', 'År_y'], axis=1)
 cleaned_data_2 = cleaned_data.rename(columns={'Kökssvinn(i kg)_x':'Kökssvinn(i kg) januari', 'Kökssvinn(i kg)_y':'Kökssvinn(i kg) februari'})
-print(cleaned_data_2)
+#print(cleaned_data_2)
 
 
 #jag vill visa jamforelse over tid under tva manader. Da tar jag bort de raderna dar minst det ena vardet varde ar 'NaN':
 
 cleaning_data_3 = cleaned_data_2.dropna(subset=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari'])
-'''print(cleaning_data_3.head(10)) '''  
+#print(cleaning_data_3.head(10)) 
 
 
 #skapar nya kolumner:
@@ -56,16 +56,16 @@ cleaning_data_3['Kökssvinn(i kg) skillnad']= cleaning_data_3['Kökssvinn(i kg) 
 cleaning_data_3['Matsvinn forandring jan-feb i %']= (cleaning_data_3['Kökssvinn(i kg) februari'] - cleaning_data_3['Kökssvinn(i kg) januari'])/cleaning_data_3['Kökssvinn(i kg) januari'] * 100
 cleaning_data_3['Matsvinn forandring jan-feb i %'] = cleaning_data_3['Matsvinn forandring jan-feb i %'].astype(int) 
 
-'''
-print(cleaning_data_3.dtypes)
-print(cleaning_data_3)
-'''
+
+#print(cleaning_data_3.dtypes)
+#print(cleaning_data_3)
+
 
 '''rad beraknare:
 rows= len(cleaning_data_3)
 print(rows)
 '''
-print(cleaning_data_3)
+
 #skapar en agg() sortering for 'key' insikter om matsvinn hos forskolorna i januari och februari:
 
 matsvinn_keyvalues=cleaning_data_3.agg({'Kökssvinn(i kg) januari':['sum','mean', 'max','min'], 'Kökssvinn(i kg) februari': ['sum','mean', 'max', 'min']})
@@ -79,7 +79,7 @@ matsvinn_keyvalues[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari']] = 
 positive_values = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %'] >= 40]
 neg_matsvinn_utv= positive_values.sort_values(by='Matsvinn forandring jan-feb i %', ascending= True)
 data_graph_1 = neg_matsvinn_utv             
- # -----------------5 skolor pa 40 okade deras matsvinn av mer an 40%
+ # -----------------5 skolor pa 40 okade deras matsvinn i februari av 40%+
 ''' print(data_graph_1) '''
 
 
@@ -97,32 +97,10 @@ data_graph_2 = pos_matsvinn_utv
 
 #print('LAGOM OFORANDRAD MATSVINN')
 lagom_utveck= cleaning_data_3.loc[(cleaning_data_3['Matsvinn forandring jan-feb i %'] >= -10) & (cleaning_data_3['Matsvinn forandring jan-feb i %'] <=10)]
-# ---------------15 skolor pa 40 hade en matsvinnforandring av +/-10% mellan de tva manaderna
+# ---------------14 skolor pa 40 hade en matsvinnforandring av +/-10% mellan de tva manaderna
+#----------------22 skolor pa 40 har en maatsvinnforandring av +/-15% mellan de tva manaderna
 
 '''print(lagom_utveck)  '''
-
-'''
-Mer en 1/3 av de analyserade forskolor hade en nastan oforandrat matsvinn pa +\-10%. 
-Ca 1/4 av de analyserade forskolor hade en krafting okning eller minskning av matsvinnet -ca 1/10 okning, och 1/10 minskning
-Mindre en halften av de analyserad forskolor hade en okning eller minskning av matsvinnet med +/-39%
-Samtliga kolumner kan fordelas vidare, men saknas viktigt data for att fordela saker rimligare.
-
-T.ex. saknas viktiga data, som gar inte att fa tag i, som t.ex. barnens narvaro under oppetdagarna, samt skolans oppetdagar under en enskild manad. 
-Att veta hur manga barn var franvarande skulle forklara varfor manga skolor hade okat matvinn mot februari t.ex.
-Franvaron kan bero pa roda dagar/semester (forsta veckan i januari ar manga fortfarande hemma, sista i februari har man sportlov),
-sjukfranvaro (februari manga ar sjuka och kanske inte dyker upp pa forskola med kort varsel, dvs mer matsvinn - man kan inkl.
-i matsvinn ocksa varor som har gatt ut och som inte har kunnat anvandas? Det vet vi inte)...
-Och sen, hur beraknas kokssvinn och vem gor det? Viktigt forklaring ocksa och lite bias fran min sida, da koksvinn kanske
-innebar ocksa biprodukter av matlagning som ej gar att anvanda?
-Antal barnen pa varje forskola istallt bor ej vara lika relevant da man forvantas hantera/kopa in mat enligt den mangden kokserveringen man forvantas laga varje dag.
-Darfor ar den aktuella narvaron viktigare.
-
-Man skulle kunna utvardera att de forskolorna som har hogst koksvinn serverar flera barn, och tvartom. Detta kanns rimligt, och daremot om man kollar
-pa de aggregat varderna (max, min, sum, mean) kan man se att det inte finns mycket forandringar, som kan tolkas att samtliha
-enheter gor sitt basta for att ha koll pa deras avfalllage.
-
-'''
-
 
 #_________________________________grafer______________________________________
 
@@ -130,12 +108,17 @@ enheter gor sitt basta for att ha koll pa deras avfalllage.
 
 sns.histplot(cleaning_data_3['Kökssvinn(i kg) januari'], kde=True, color='cyan', bins=15)
 sns.histplot(cleaning_data_3['Kökssvinn(i kg) februari'], kde= True, color='yellow', bins=15)
-plt.title('Antal forskolor x atsvinn i kg - distribution')
+plt.title('Antal forskolor x matsvinn i kg - distribution')
 plt.ylabel('Antal_forskolor')
 plt.xlabel('Matsvinn i kg')
 plt.show()
 
-#overblick over skillnader mellan jan och febr: pa ca 40 enheter, finns enbart nagra stycken stora avvikelser mellan matsvinn
+'''overblick over skillnader mellan jan och febr: 
+Enligt grafen, de flesta forskolorna hade ett matsvinn mellan 0 och 20kg per enhet under januari e februari. 
+
+'''
+
+
 
 # 2.MATSVINN OKNING: forskolor som okade matsvinn 40% + mellan i februari jmf med januari:
 
@@ -148,8 +131,11 @@ plt.xlabel("Forskole namn")
 plt.ylabel("Kökssvinn i kg")
 plt.show()
 
+'''5 forskolor hade en kraftig okning av matsvinn mellan januari och februari. Ingen av dem varbland de som hade hogst matsvinn varde, daremot en av dem, 'Petunian', 
+hade lagst matsvinn varde bade januari och februari'''
 
-# 3 MATSVINN MINSKNING: forskolor som minskade deras matsvinn av 40% + mellan janauri och februari:
+
+# 3 MATSVINN MINSKNING: forskolor som minskade deras matsvinn av 40% + mellan januari och februari:
 
 sns.lineplot(data=data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) januari', color = 'orange', marker='o' , label = 'januari')
 sns.lineplot(data=data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) februari', color = 'green', marker= 'o' , label = 'februari')
@@ -159,6 +145,8 @@ plt.xlabel("Forskola")
 plt.ylabel("Kökssvinn i kg")
 plt.show()
 
+'''4 forskolor minskade deras matsvinn kraftigt mellan januari och februari. 3 av dem hade lag matsvinn varde (mindre an 10kg)
+ redan i borjan, Gullpudran var den enda som hade ett matsvinn i januari hogre an 20kg'''
 
 # 4 MATSVINN UTAN STORRE FORANDRING: forskolor som hade ett +\-10% matsvinn forandring mellan januari och februari:
     #a. matsvinnsforandring jmfr:
@@ -188,61 +176,69 @@ plt.xlabel('matsvinn januari i kg')
 plt.ylabel('matsvinn februari i kg')
 plt.show()
 
+'''i bada grafer ovan kan man se de forskolor som hade lite forandring mellan matsvinn i januari och februari. I den forsta grafen ser man att punkterna ligger intill varandra,
+i den andra kan man nastan saga att samtliga forskolor ligger pa en nastan rat linje, bada visualiseringar bevisar den lilla avvikelsen mellan varden'''
 
 
-#______________________ny merging - joinar tva till dataset, bara for att gora mitt liv mer komplicerat
+#______________________ny merging - joinar tva till dataset
 
 ny_merging_files= pd.merge(cleaning_data_3, df3, on = 'Enhet', how = 'outer')
 ny_merge =pd.merge(ny_merging_files, df4, on = 'Enhet', how='outer')
 #print(ny_merge)
 
+#tar bort onodiga kolumner, byter namn till andra:
 merging =ny_merge.drop(['Matsvinn forandring jan-feb i %','Kökssvinn(i kg) skillnad', 'Kategori_x', 'År_x','Månad_x' ,'Månad_y','Kategori_y' , 'År_y'], axis=1)
-#print(f'detta funkar:{merging}')
 merging_ = merging.rename(columns={'Kökssvinn(i kg)':'Kökssvinn(i kg) mars'})
 merging_2 =merging_.rename(columns={'Kökssvinn  (i kg)':'Kökssvinn(i kg) april'})
 #print(merging_2)  
 #  
 #59 rows inkl. kolumns titel
 
-#Jag tar bort samtliga rader dar ALLA varde ar NaN da jag inte kan arbeta med dem anda (fast jag vet jag inte behover gora detta for att kora 'Aggregate'):
+
+#Jag tar bort samtliga rader dar ALLA varde ar NaN da jag inte kan arbeta med dem anda (fast jag vet jag inte behover gora detta for att jag kommer kora mina nasta grafer pa 'Aggregate' data):
 
 merging_ma = merging_2.dropna(axis=0, how= 'all', subset=merging_2.columns[1:])
 print(merging_ma)
 #52 rader kvar inkl. kolumns titel
-
+#merging_ma= merging_2.dropna(axis=0, how ='any')    kan prova att se forandringar i data om man dropnar samtliga rader med minst en NaN varde
+print(merging_ma)
 '''rowss=len(merging_ma)
 print(rowss)
 '''
 
 
-# #skapar en agg() sortering for 'key' insikter om matsvinn hos Sodertalje forskolor i samtliga manader januari - april, inklusive kolumn med NaN varden:
+#skapar en agg() sortering for 'key' insikter om matsvinn hos Sodertalje forskolor i samtliga manader januari - april, inklusive raderna med NaN varden:
 
 matsvinn_keys=merging_ma.agg({'Kökssvinn(i kg) januari':['sum','mean', 'max','min'], 'Kökssvinn(i kg) februari': ['sum','mean', 'max', 'min'], 
 'Kökssvinn(i kg) mars':['sum','mean', 'max','min'], 'Kökssvinn(i kg) april':['sum','mean', 'max','min']})
 matsvinn_keys[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari', 'Kökssvinn(i kg) mars', 'Kökssvinn(i kg) april']] = matsvinn_keys[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari','Kökssvinn(i kg) mars','Kökssvinn(i kg) april']].round(2).astype(float)   #kor INT typ pa allt
+#  #tycker det ar bra med avrundning, men behovs ej egentligen
 
-print(matsvinn_keys)  #tycker det ar bra med avrundning, men behovs ej egentligen
 
 
-#forbereder mina nya data for plotting enligt chatGPT visdom (skulle jag soka syntax sjalv skulle det ta 1 ar att gora detta):
+# #forbereder mina nya data for plotting enligt AI visdom (skulle jag soka syntax sjalv pa stack overflow skulle det ta 1 ar att gora detta):
 
 matsvinn_keys = matsvinn_keys.reset_index()
-
 merging_data = matsvinn_keys.melt(id_vars=['index'], 
 value_vars=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari', 'Kökssvinn(i kg) mars', 'Kökssvinn(i kg) april'],
 var_name='Månad',
 value_name='Kökssvinn (kg)')
 merging_data.columns=['Aggregat_typ', 'Månad', 'Kökssvinn (kg)']
-print(merging_data)
+#print(merging_data)
+
+#____________________________i de kommande grafer hanterar vi SUM, MEDEL, MIN, MAX varden_______________________________________
 
 
-#______________________________BETTER SCATTERPLOT (BUBBLES)________________________________________
+#______________________________________________BETTER SCATTERPLOT (BUBBLES)________________________________________
 sns.scatterplot(x='Månad', y='Kökssvinn (kg)', hue='Aggregat_typ', size='Kökssvinn (kg)', sizes=(30, 180), data=merging_data)
 
 plt.title('Matsvinn Sodertalje forskolor_better_scatterplot')
 plt.xlabel('Månad')
 plt.ylabel('Kökssvinn (i kg)')
 plt.show()
+'''denna graf var valdig rolig, hade onskat en annan typ av data for att arbeta med den. 
+Det framgar att april manad ar den manaden med lagre matsvinnsumma och lagre medel, och innehaller forskolorna som har lagst min och max varde pa matsvinn. 
+Om man tar bort samtliga rader med minst en NaN varde, summa matsvinn ar fortfarande lagre i april, men inte medel, min och max'''
 
 #___________________________________HEATMAP____________________________________________________________
 Data_graph_3 = merging_data.pivot(index='Månad', columns='Aggregat_typ', values='Kökssvinn (kg)')
@@ -255,27 +251,45 @@ plt.show()
 
 
 
-# merging_data.to_csv('Arbete_med_flera_kolumner.csv', index=False) 
-data_graph_1.to_excel('Dataframe_1.xlsx', index=False)
-# #data_graph_2.to_excel('Dataframe 2.xlsx', index=False)
-# Data_graph_3.to_excel('Arbete_med_flera_kolumner_2.xlsx, index=False)
-# #lagom_utveck.to_excel('Dataframe_3.xlsx', index=False)
+# # merging_data.to_csv('Arbete_med_flera_kolumner.csv', index=False) 
+# data_graph_1.to_excel('Dataframe_1.xlsx', index=False)
+# # #data_graph_2.to_excel('Dataframe 2.xlsx', index=False)
+# # Data_graph_3.to_excel('Arbete_med_flera_kolumner_2.xlsx, index=False)
+# # #lagom_utveck.to_excel('Dataframe_3.xlsx', index=False)
 
 
-#Brunnsang - Grusasen omrade: forskolor som ligger i samma geografiska omrade(saknas en forskola, dar vi hade inget data!): 
-# forskole_namn= ['Algården',  'Grusåsen', 'Oxelgrenshagen', 'Trädgården']
-# forsk_omrade= merging_2[merging_2['Enhet'].isin(forskole_namn)]
-# print(forsk_omrade)
+# #Brunnsang - Grusasen omrade: forskolor som ligger i samma geografiska omrade(saknas en forskola, dar vi hade inget data!): 
+# # forskole_namn= ['Algården',  'Grusåsen', 'Oxelgrenshagen', 'Trädgården']
+# # forsk_omrade= merging_2[merging_2['Enhet'].isin(forskole_namn)]
+# # print(forsk_omrade)
 
 
-# # #UTVARDERING:
+# #UTVARDERING:
 
-# '''
-# I had well ordered data to work with, which could result in nice graphs. 
-# I downloaded and merged different files to allow a comparison over time, which was the easiest and most valuable operation to do with those data. 
-# I had difficult to sort out the most important insights, reason being that data which would allow a more
-# objective analysis was in fact missing -as exempel, amount of children/forskola, amount of days open each month, children presence each month, food catering or not:
-# things which would have explained the  reason of the variation over time, but we did not have them
-# Googling aroun the only thing hich may restrict the fiel for the analysis would be separating the schools by geograpghic area, but this is a job that may be done manually
-#by looking att SOdertalhe kommun website. But still, we can't have the most important detailas a children presence or closing days which would explain the
-#different amount of waste: exempel, janaury month preschools may be closed longer since it's after christmas vacation, but february may be the same with sport vacations
+# '''Mer en 1/3 av de analyserade forskolor hade en nastan oforandrat matsvinn pa +\-10%. 
+# Mer an halften av de analyserade forskolor hade ett matsvinn forandring pa +/-15%.
+# Ca 1/4 av de analyserade forskolor hade en krafting okning eller minskning av matsvinnet: av dessa, ca 1/10 hade en kraftigt okning, och 1/10 en kraftig minskning
+# Samtliga kolumner kan fordelas vidare, men saknas viktigt data for att fordela saker rimligare.
+# CA 1/4 av forskolorna hade ett matsvinn forandring mellan +/-16% och +/-39%.
+
+# Datakallor for dessa analyser val valdig prydliga, men berattar inte oss mycket, da det saknas kontexten som kan ge meningen till de olika varden.
+# T.ex. saknas viktiga data om barnens narvaro under oppetdagarna, samt sjalva forskolans oppetdagar under en enskild manad. 
+# Barnens narvaro/franvaro skulle forklara varfor manga skolor hade okat/minskat matvinn mellan de tva manaderna.
+# Franvaron kan bero pa roda dagar/semester (forsta veckan i januari ar manga fortfarande hemma, sista i februari har man sportlov), eller
+# sjukfranvaro (februari manga ar sjuka och kanske inte dyker upp pa forskola med kort varsel, dvs mer matsvinn) - man kan inkl.
+# i matsvinn ocksa varor som har gatt ut och som inte har kunnat anvandas? Det vet vi inte)...
+# Man borde ocksa behova ett oversikt pa hur mycket mat bestalls jamforts med andel barn som skall serveras, och en detaljerad beskrivning 
+# pa hur man beraknar koksvinn? 
+# Viktigt forklaring ocksa och lite bias fran min sida, da koksvinn kanskeinnebar ocksa biprodukter av matlagning som ej gar att anvanda, inte enbart atfardig mat?
+
+# Antal barnen pa varje forskola istallet bor ej vara relebant for de flesta berakningar.
+# Man skulle kunna utvardera att de forskolorna som har hogst koksvinn serverar flera barn, och tvartom. Detta kanns rimligt, och daremot om man kollar
+# pa de aggregat varderna (max, min, sum, mean) pa fyra manader, kan man se att det inte finns storre forandringar, som kan tolkas att samtliga
+# enheter gor sitt basta for att ha koll pa deras avfallage.
+# Given att, i forsta delen av min Transform process, sorterade jag ut de raderna dar minst den ena vardet var NaN, skolan som hade hogst matsvinn i januari var 'Algarden'
+# med ca 2kg per dag*, och den som hade minsta matsvinn var 'Petunian'. Manga forskolor hade en otrolig lag matsvinn, men svart att veta
+# varfor blev det sa (barnen tar eget mat? catering? har de inget kok och raknar ej matsvinnet? fel datainmatning i excel_kallan)?
+
+# Man skulle ha data for samtliga forskolor i stan med NARVARO, OPPETDAGARNA samt BESKRIVNING om vad som bedoms som matsvinn for att forklara varfor vissa hade betyligt mer an andra
+
+# *hur raknar man detta? 43 kg / 21 dagar, som ar antalet vardagar - roda dagar i januari 2023. Jag utgar att skolan varit oppet som vanligt(bias'''
