@@ -55,8 +55,6 @@ cleaning_data_3['Kökssvinn(i kg) skillnad']= cleaning_data_3['Kökssvinn(i kg) 
 #2. Kollar i % hur mycket andring blev det:
 cleaning_data_3['Matsvinn forandring jan-feb i %']= (cleaning_data_3['Kökssvinn(i kg) februari'] - cleaning_data_3['Kökssvinn(i kg) januari'])/cleaning_data_3['Kökssvinn(i kg) januari'] * 100
 cleaning_data_3['Matsvinn forandring jan-feb i %'] = cleaning_data_3['Matsvinn forandring jan-feb i %'].astype(int) 
-
-
 #print(cleaning_data_3.dtypes)
 #print(cleaning_data_3)
 
@@ -66,16 +64,18 @@ rows= len(cleaning_data_3)
 print(rows)
 '''
 
+
 #skapar en agg() sortering for 'key' insikter om matsvinn hos forskolorna i januari och februari:
 
 matsvinn_keyvalues=cleaning_data_3.agg({'Kökssvinn(i kg) januari':['sum','mean', 'max','min'], 'Kökssvinn(i kg) februari': ['sum','mean', 'max', 'min']})
 matsvinn_keyvalues[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari']] = matsvinn_keyvalues[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari']].round(2).astype(float)
 
 
+
 # Filtrerar ut data for att skapa en mindre graf, men det gar att koras grafer pa samtliga 'Enheter' dvs forskolorna:
 
 # 1.stort negativt matsvinn forandring: skolor som slandge 40% + mat i februari jmf med januari:
-#print('NEGATIV UTVECKLING ---> mer matsvinn')
+print('NEGATIV UTVECKLING ---> mer matsvinn')
 positive_values = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %'] >= 40]
 neg_matsvinn_utv= positive_values.sort_values(by='Matsvinn forandring jan-feb i %', ascending= True)
 data_graph_1 = neg_matsvinn_utv             
@@ -83,9 +83,10 @@ data_graph_1 = neg_matsvinn_utv
 ''' print(data_graph_1) '''
 
 
+
 # 2. mest positiva matsvinn forandring: skolor som slandge 40% + mindre mat i februari jmf med januari
 
-#print('POSITIV UTVECKLING ---> mindre matsvinn')
+print('POSITIV UTVECKLING ---> mindre matsvinn')
 neg_values = cleaning_data_3[cleaning_data_3['Matsvinn forandring jan-feb i %']  <= -40 ]
 pos_matsvinn_utv= neg_values.sort_values(by='Matsvinn forandring jan-feb i %', ascending = True)
 data_graph_2 = pos_matsvinn_utv               
@@ -93,14 +94,15 @@ data_graph_2 = pos_matsvinn_utv
 '''print(data_graph_2)'''
 
 
+
 # 3. forskolor som hade en liten forandring i matsvinn mangd mellan jan/feb:
 
-#print('LAGOM OFORANDRAD MATSVINN')
+print('LAGOM OFORANDRAT MATSVINN')
 lagom_utveck= cleaning_data_3.loc[(cleaning_data_3['Matsvinn forandring jan-feb i %'] >= -10) & (cleaning_data_3['Matsvinn forandring jan-feb i %'] <=10)]
-# ---------------14 skolor pa 40 hade en matsvinnforandring av +/-10% mellan de tva manaderna
-#----------------22 skolor pa 40 har en maatsvinnforandring av +/-15% mellan de tva manaderna
+# ---------------14 skolor pa 40 har en matsvinnforandring av +/-10% mellan de tva manaderna
+#----------------22 skolor pa 40 har en matsvinnforandring av +/-15% mellan de tva manaderna
 
-'''print(lagom_utveck)  '''
+'''print(lagom_utveck) '''
 
 #_________________________________grafer______________________________________
 
@@ -146,7 +148,7 @@ plt.ylabel("Kökssvinn i kg")
 plt.show()
 
 '''4 forskolor minskade deras matsvinn kraftigt mellan januari och februari. 3 av dem hade lag matsvinn varde (mindre an 10kg)
- redan i borjan, Gullpudran var den enda som hade ett matsvinn i januari hogre an 20kg'''
+ redan i borjan, 'Gullpudran' var den enda som hade ett matsvinn i januari hogre an 20kg'''
 
 # 4 MATSVINN UTAN STORRE FORANDRING: forskolor som hade ett +\-10% matsvinn forandring mellan januari och februari:
     #a. matsvinnsforandring jmfr:
@@ -191,7 +193,7 @@ merging =ny_merge.drop(['Matsvinn forandring jan-feb i %','Kökssvinn(i kg) skil
 merging_ = merging.rename(columns={'Kökssvinn(i kg)':'Kökssvinn(i kg) mars'})
 merging_2 =merging_.rename(columns={'Kökssvinn  (i kg)':'Kökssvinn(i kg) april'})
 #print(merging_2)  
-#  
+
 #59 rows inkl. kolumns titel
 
 
@@ -199,11 +201,12 @@ merging_2 =merging_.rename(columns={'Kökssvinn  (i kg)':'Kökssvinn(i kg) april
 
 merging_ma = merging_2.dropna(axis=0, how= 'all', subset=merging_2.columns[1:])
 print(merging_ma)
-#52 rader kvar inkl. kolumns titel
+
 #merging_ma= merging_2.dropna(axis=0, how ='any')    kan prova att se forandringar i data om man dropnar samtliga rader med minst en NaN varde
-print(merging_ma)
 '''rowss=len(merging_ma)
 print(rowss)
+
+#52 rader kvar inkl. kolumns titel
 '''
 
 
@@ -226,6 +229,9 @@ value_name='Kökssvinn (kg)')
 merging_data.columns=['Aggregat_typ', 'Månad', 'Kökssvinn (kg)']
 #print(merging_data)
 
+
+
+
 #____________________________i de kommande grafer hanterar vi SUM, MEDEL, MIN, MAX varden_______________________________________
 
 
@@ -240,7 +246,7 @@ plt.show()
 Det framgar att april manad ar den manaden med lagre matsvinnsumma och lagre medel, och innehaller forskolorna som har lagst min och max varde pa matsvinn. 
 Om man tar bort samtliga rader med minst en NaN varde, summa matsvinn ar fortfarande lagre i april, men inte medel, min och max'''
 
-#___________________________________HEATMAP____________________________________________________________
+#___________________________________________________HEATMAP____________________________________________________________
 Data_graph_3 = merging_data.pivot(index='Månad', columns='Aggregat_typ', values='Kökssvinn (kg)')
 
 sns.heatmap(Data_graph_3, annot=True, cmap='YlGnBu', fmt=".2f", linewidths=1)
@@ -248,15 +254,17 @@ plt.title('Matsvinn Sodertalje forskolor')
 plt.xlabel('Aggregat_typ')
 plt.ylabel('Månad')
 plt.show()
+ #jag har experimenterat med nastan alla fargpaletter har
 
 
 
-# # merging_data.to_csv('Arbete_med_flera_kolumner.csv', index=False) 
-# data_graph_1.to_excel('Dataframe_1.xlsx', index=False)
-# # #data_graph_2.to_excel('Dataframe 2.xlsx', index=False)
-# # Data_graph_3.to_excel('Arbete_med_flera_kolumner_2.xlsx, index=False)
-# # #lagom_utveck.to_excel('Dataframe_3.xlsx', index=False)
-
+# merging_data.to_csv('Arbete_med_flera_kolumner.csv', index=False) 
+# data_graph_1.to_excel('Df matsvinn_neg 40%_.xlsx', index=False)
+# data_graph_2.to_excel('Df matsvinn_pos 40%_.xlsx', index=False)
+# Data_graph_3.to_excel('Arbete_med_flera_kolumner_2.xlsx, index=False)
+# lagom_utveck.to_excel('Df matsvinn 10%.xlsx', index=False)
+merging_ma.to_excel('Df for LR and Cluster.xlsx', index=False)
+Data_graph_3.to_pickle('Exempel export inlagd_gurka.pkl')
 
 # #Brunnsang - Grusasen omrade: forskolor som ligger i samma geografiska omrade(saknas en forskola, dar vi hade inget data!): 
 # # forskole_namn= ['Algården',  'Grusåsen', 'Oxelgrenshagen', 'Trädgården']
