@@ -274,30 +274,30 @@ Data_graph_3.to_pickle('Exempel export inlagd_gurka.pkl')
 
 # #UTVARDERING:
 
-# '''Mer en 1/3 av de analyserade forskolor hade en nastan oforandrat matsvinn pa +\-10%. 
-# Mer an halften av de analyserade forskolor hade ett matsvinn forandring pa +/-15%.
-# Ca 1/4 av de analyserade forskolor hade en krafting okning eller minskning av matsvinnet: av dessa, ca 1/10 hade en kraftigt okning, och 1/10 en kraftig minskning
-# Samtliga kolumner kan fordelas vidare, men saknas viktigt data for att fordela saker rimligare.
-# CA 1/4 av forskolorna hade ett matsvinn forandring mellan +/-16% och +/-39%.
+'''Mer en 1/3 av de analyserade forskolor hade en nastan oforandrat matsvinn pa +\-10%. 
+Mer an halften av de analyserade forskolor hade ett matsvinn forandring pa +/-15%.
+Ca 1/4 av de analyserade forskolor hade en krafting okning eller minskning av matsvinnet: av dessa, ca 1/10 hade en kraftigt okning, och 1/10 en kraftig minskning
+Samtliga kolumner kan fordelas vidare, men saknas viktigt data for att fordela saker rimligare.
+CA 1/4 av forskolorna hade ett matsvinn forandring mellan +/-16% och +/-39%.
 
-# Datakallor for dessa analyser val valdig prydliga, men berattar inte oss mycket, da det saknas kontexten som kan ge meningen till de olika varden.
-# T.ex. saknas viktiga data om barnens narvaro under oppetdagarna, samt sjalva forskolans oppetdagar under en enskild manad. 
-# Barnens narvaro/franvaro skulle forklara varfor manga skolor hade okat/minskat matvinn mellan de tva manaderna.
-# Franvaron kan bero pa roda dagar/semester (forsta veckan i januari ar manga fortfarande hemma, sista i februari har man sportlov), eller
-# sjukfranvaro (februari manga ar sjuka och kanske inte dyker upp pa forskola med kort varsel, dvs mer matsvinn) - man kan inkl.
-# i matsvinn ocksa varor som har gatt ut och som inte har kunnat anvandas? Det vet vi inte)...
-# Man borde ocksa behova ett oversikt pa hur mycket mat bestalls jamforts med andel barn som skall serveras, och en detaljerad beskrivning 
-# pa hur man beraknar koksvinn? 
-# Viktigt forklaring ocksa och lite bias fran min sida, da koksvinn kanskeinnebar ocksa biprodukter av matlagning som ej gar att anvanda, inte enbart atfardig mat?
+Datakallor for dessa analyser val valdig prydliga, men berattar inte oss mycket, da det saknas kontexten som kan ge meningen till de olika varden.
+T.ex. saknas viktiga data om barnens narvaro under oppetdagarna, samt sjalva forskolans oppetdagar under en enskild manad. 
+Barnens narvaro/franvaro skulle forklara varfor manga skolor hade okat/minskat matvinn mellan de tva manaderna.
+Franvaron kan bero pa roda dagar/semester (forsta veckan i januari ar manga fortfarande hemma, sista i februari har man sportlov), eller
+sjukfranvaro (februari manga ar sjuka och kanske inte dyker upp pa forskola med kort varsel, dvs mer matsvinn) - man kan inkl.
+i matsvinn ocksa varor som har gatt ut och som inte har kunnat anvandas? Det vet vi inte)...
+Man borde ocksa behova ett oversikt pa hur mycket mat bestalls jamforts med andel barn som skall serveras, och en detaljerad beskrivning 
+pa hur man beraknar koksvinn? 
+Viktigt forklaring ocksa och lite bias fran min sida, da koksvinn kanskeinnebar ocksa biprodukter av matlagning som ej gar att anvanda, inte enbart atfardig mat?
 
-# Antal barnen pa varje forskola istallet bor ej vara relebant for de flesta berakningar.
-# Man skulle kunna utvardera att de forskolorna som har hogst koksvinn serverar flera barn, och tvartom. Detta kanns rimligt, och daremot om man kollar
-# pa de aggregat varderna (max, min, sum, mean) pa fyra manader, kan man se att det inte finns storre forandringar, som kan tolkas att samtliga
-# enheter gor sitt basta for att ha koll pa deras avfallage.
-# Given att, i forsta delen av min Transform process, sorterade jag ut de raderna dar minst den ena vardet var NaN, skolan som hade hogst matsvinn i januari var 'Algarden'
-# med ca 2kg per dag*, och den som hade minsta matsvinn var 'Petunian'. Manga forskolor hade en otrolig lag matsvinn, men svart att veta
-# varfor blev det sa (barnen tar eget mat? catering? har de inget kok och raknar ej matsvinnet? fel datainmatning i excel_kallan)?
+Antal barnen pa varje forskola istallet bor ej vara relebant for de flesta berakningar.
+Man skulle kunna utvardera att de forskolorna som har hogst koksvinn serverar flera barn, och tvartom. Detta kanns rimligt, och daremot om man kollar
+pa de aggregat varderna (max, min, sum, mean) pa fyra manader, kan man se att det inte finns storre forandringar, som kan tolkas att samtliga
+enheter gor sitt basta for att ha koll pa deras avfallage.
+Given att, i forsta delen av min Transform process, sorterade jag ut de raderna dar minst den ena vardet var NaN, skolan som hade hogst matsvinn i januari var 'Algarden'
+med ca 2kg per dag*, och den som hade minsta matsvinn var 'Petunian'. Manga forskolor hade en otrolig lag matsvinn, men svart att veta
+varfor blev det sa (barnen tar eget mat? catering? har de inget kok och raknar ej matsvinnet? fel datainmatning i excel_kallan)?
 
-# Man skulle ha data for samtliga forskolor i stan med NARVARO, OPPETDAGARNA samt BESKRIVNING om vad som bedoms som matsvinn for att forklara varfor vissa hade betyligt mer an andra
+Man skulle ha data for samtliga forskolor i stan med NARVARO, OPPETDAGARNA samt BESKRIVNING om vad som bedoms som matsvinn for att forklara varfor vissa hade betyligt mer an andra
 
-# *hur raknar man detta? 43 kg / 21 dagar, som ar antalet vardagar - roda dagar i januari 2023. Jag utgar att skolan varit oppet som vanligt(bias'''
+*hur raknar man detta? 43 kg / 21 dagar, som ar antalet vardagar - roda dagar i januari 2023. Jag utgar att skolan varit oppet som vanligt(bias'''
