@@ -105,73 +105,73 @@ lagom_utveck= cleaning_data_3.loc[(cleaning_data_3['Matsvinn forandring jan-feb 
 Mer en 1/3 av de analyserade forskolor hade en nastan oforandrat matsvinn pa +\-10%. 
 Ca 1/4 av de analyserade forskolor hade en krafting okning eller minskning av matsvinnet -ca 1/10 okning, och 1/10 minskning
 Mindre en halften av de analyserad forskolor hade en okning eller minskning av matsvinnet med +/-39%
-Samtliga kolumner kan fordelas vidare, men  saknas viktigt data for att fordela saker rimligare- se analys
+Samtliga kolumner kan fordelas vidare, men saknas viktigt data for att fordela saker rimligare- se analys
 '''
 
 
 #_________________________________grafer______________________________________
 
-#1. OVERSIKT ANTAL SKOLOR X KG MATSVINN UNDER JANUARI OCH FEBRUARI MANAD
+# #1. OVERSIKT ANTAL SKOLOR X KG MATSVINN UNDER JANUARI OCH FEBRUARI MANAD
 
-sns.histplot(cleaning_data_3['Kökssvinn(i kg) januari'], kde=True, color='cyan', bins=15)
-sns.histplot(cleaning_data_3['Kökssvinn(i kg) februari'], kde= True, color='yellow', bins=15)
-plt.title('Antal forskolor x atsvinn i kg - distribution')
-plt.ylabel('Antal_forskolor')
-plt.xlabel('Matsvinn i kg')
-plt.show()
+# sns.histplot(cleaning_data_3['Kökssvinn(i kg) januari'], kde=True, color='cyan', bins=15)
+# sns.histplot(cleaning_data_3['Kökssvinn(i kg) februari'], kde= True, color='yellow', bins=15)
+# plt.title('Antal forskolor x atsvinn i kg - distribution')
+# plt.ylabel('Antal_forskolor')
+# plt.xlabel('Matsvinn i kg')
+# plt.show()
 
-#overblick over skillnader mellan jan och febr: pa ca 40 enheter, finns enbart nagra stycken stora avvikelser mellan matsvinn
+# #overblick over skillnader mellan jan och febr: pa ca 40 enheter, finns enbart nagra stycken stora avvikelser mellan matsvinn
 
-# 2.MATSVINN OKNING: forskolor som okade matsvinn 40% + mellan i februari jmf med januari:
+# # 2.MATSVINN OKNING: forskolor som okade matsvinn 40% + mellan i februari jmf med januari:
 
-neg_utveckling = data_graph_1.melt(id_vars=['Enhet'], value_vars=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari'], 
-var_name='Månad', value_name='Kökssvinn (i kg)')
-sns.catplot(data=neg_utveckling, x='Enhet', y='Kökssvinn (i kg)', hue='Månad', kind='bar', dodge=True, height=8, aspect=1)
-plt.title("Jämförelse av kökssvinn i januari och februari")
-plt.suptitle('Top 5 forskolor som okade deras matsvinn fran januari till februari')
-plt.xlabel("Forskole namn")
-plt.ylabel("Kökssvinn i kg")
-plt.show()
-
-
-# 3 MATSVINN MINSKNING: forskolor som minskade deras matsvinn av 40% + mellan janauri och februari:
-
-sns.lineplot(data=data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) januari', color = 'orange', marker='o' , label = 'januari')
-sns.lineplot(data=data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) februari', color = 'green', marker= 'o' , label = 'februari')
-plt.title("Jämförelse av kökssvinn i januari och februari")
-plt.suptitle('Forskolor som minskade deras matsvinn fran januari till februari med en skillnad pa +30%')
-plt.xlabel("Forskola")
-plt.ylabel("Kökssvinn i kg")
-plt.show()
+# neg_utveckling = data_graph_1.melt(id_vars=['Enhet'], value_vars=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari'], 
+# var_name='Månad', value_name='Kökssvinn (i kg)')
+# sns.catplot(data=neg_utveckling, x='Enhet', y='Kökssvinn (i kg)', hue='Månad', kind='bar', dodge=True, height=8, aspect=1)
+# plt.title("Jämförelse av kökssvinn i januari och februari")
+# plt.suptitle('Top 5 forskolor som okade deras matsvinn fran januari till februari')
+# plt.xlabel("Forskole namn")
+# plt.ylabel("Kökssvinn i kg")
+# plt.show()
 
 
-# 4 MATSVINN UTAN STORRE FORANDRING: forskolor som hade ett +\-10% matsvinn forandring mellan januari och februari:
-    #a. matsvinnsforandring jmfr:
-sns.scatterplot(y='Kökssvinn(i kg) januari', x='Enhet' , data=lagom_utveck, color='darkblue', label='jan' , s=150)
-sns.scatterplot(y='Kökssvinn(i kg) februari', x='Enhet',  data=lagom_utveck, color='orange', label = 'feb', s=80)
-plt.title('Forskolor som upplevde +\-10% matsvinnsforandring')
-plt.legend(loc= 'upper right')
-plt.ylabel('Kökssvinn(i kg)')
-plt.xlabel('Forskola:')
-plt.show()
+# # 3 MATSVINN MINSKNING: forskolor som minskade deras matsvinn av 40% + mellan janauri och februari:
+
+# sns.lineplot(data=data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) januari', color = 'orange', marker='o' , label = 'januari')
+# sns.lineplot(data=data_graph_2, x='Enhet', y= 'Kökssvinn(i kg) februari', color = 'green', marker= 'o' , label = 'februari')
+# plt.title("Jämförelse av kökssvinn i januari och februari")
+# plt.suptitle('Forskolor som minskade deras matsvinn fran januari till februari med en skillnad pa +30%')
+# plt.xlabel("Forskola")
+# plt.ylabel("Kökssvinn i kg")
+# plt.show()
 
 
- #eller
-      #b. matsvinnsforandring jmfr:
+# # 4 MATSVINN UTAN STORRE FORANDRING: forskolor som hade ett +\-10% matsvinn forandring mellan januari och februari:
+#     #a. matsvinnsforandring jmfr:
+# sns.scatterplot(y='Kökssvinn(i kg) januari', x='Enhet' , data=lagom_utveck, color='darkblue', label='jan' , s=150)
+# sns.scatterplot(y='Kökssvinn(i kg) februari', x='Enhet',  data=lagom_utveck, color='orange', label = 'feb', s=80)
+# plt.title('Forskolor som upplevde +\-10% matsvinnsforandring')
+# plt.legend(loc= 'upper right')
+# plt.ylabel('Kökssvinn(i kg)')
+# plt.xlabel('Forskola:')
+# plt.show()
 
-plt.figure(figsize=(10, 6))
-sns.scatterplot(data=lagom_utveck, x='Kökssvinn(i kg) januari', y='Kökssvinn(i kg) februari', color ='salmon', s=150)
-for i in range(lagom_utveck.shape[0]):
-    plt.text(lagom_utveck['Kökssvinn(i kg) januari'].iloc[i] + 0.5, 
-             lagom_utveck['Kökssvinn(i kg) februari'].iloc[i], 
-             lagom_utveck['Enhet'].iloc[i],
-             fontsize=10, ha='left', va='top')
 
-plt.title('Forskolor med +/-10% matsvinn forandring mellan januari och februari')
-plt.suptitle('Scatterplot jmfrs Januari/Februari')
-plt.xlabel('matsvinn januari i kg')
-plt.ylabel('matsvinn februari i kg')
-plt.show()
+#  #eller
+#       #b. matsvinnsforandring jmfr:
+
+# plt.figure(figsize=(10, 6))
+# sns.scatterplot(data=lagom_utveck, x='Kökssvinn(i kg) januari', y='Kökssvinn(i kg) februari', color ='salmon', s=150)
+# for i in range(lagom_utveck.shape[0]):
+#     plt.text(lagom_utveck['Kökssvinn(i kg) januari'].iloc[i] + 0.5, 
+#              lagom_utveck['Kökssvinn(i kg) februari'].iloc[i], 
+#              lagom_utveck['Enhet'].iloc[i],
+#              fontsize=10, ha='left', va='top')
+
+# plt.title('Forskolor med +/-10% matsvinn forandring mellan januari och februari')
+# plt.suptitle('Scatterplot jmfrs Januari/Februari')
+# plt.xlabel('matsvinn januari i kg')
+# plt.ylabel('matsvinn februari i kg')
+# plt.show()
 
 
 
@@ -188,71 +188,76 @@ merging_2 =merging_.rename(columns={'Kökssvinn  (i kg)':'Kökssvinn(i kg) april
 #print(merging_2)   
 #59 rows inkl. kolumns titel
 
+#Brunnsang - Grusasen omrade: forskolor som ligger i samma geografiska omrade(saknas en forskola, dar vi hade inget data!): 
+forskole_namn= ['Algården',  'Grusåsen', 'Oxelgrenshagen', 'Trädgården']
+forsk_omrade= merging_2[merging_2['Enhet'].isin(forskole_namn)]
+print(forsk_omrade)
+
 
 #Jag tar bort samtliga rader dar ALLA varde ar NaN da jag inte kan arbeta med dem anda (fast jag vet jag inte behover gora detta for att kora 'Aggregate'):
 
-merging_ma = merging_2.dropna(axis=0, how= 'all', subset=merging_2.columns[1:])
-#print(merging_ma)
-#52 rader kvar inkl. kolumns titel
+# merging_ma = merging_2.dropna(axis=0, how= 'all', subset=merging_2.columns[1:])
+# #print(merging_ma)
+# #52 rader kvar inkl. kolumns titel
 
-'''rowss=len(merging_ma)
-print(rowss)'''
-
-
-#skapar en agg() sortering for 'key' insikter om matsvinn hos Sodertalje forskolor i samtliga manader janauri - april, inklusive kolumn med NaN varden:
-
-matsvinn_keys=merging_ma.agg({'Kökssvinn(i kg) januari':['sum','mean', 'max','min'], 'Kökssvinn(i kg) februari': ['sum','mean', 'max', 'min'], 
-'Kökssvinn(i kg) mars':['sum','mean', 'max','min'], 'Kökssvinn(i kg) april':['sum','mean', 'max','min']})
-matsvinn_keys[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari', 'Kökssvinn(i kg) mars', 'Kökssvinn(i kg) april']] = matsvinn_keys[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari','Kökssvinn(i kg) mars','Kökssvinn(i kg) april']].round(2).astype(float)   #kor INT typ pa allt
-
-print(matsvinn_keys)  #tycker det ar bra med avrundning, men behovs ej egentligen
+# '''rowss=len(merging_ma)
+# print(rowss)'''
 
 
-#forbereder mina nya data for plotting enligt chatGPT visdom (skulle jag soka syntax sjalv skulle det ta 1 ar att gora detta):
+# #skapar en agg() sortering for 'key' insikter om matsvinn hos Sodertalje forskolor i samtliga manader januari - april, inklusive kolumn med NaN varden:
 
-matsvinn_keys = matsvinn_keys.reset_index()
+# matsvinn_keys=merging_ma.agg({'Kökssvinn(i kg) januari':['sum','mean', 'max','min'], 'Kökssvinn(i kg) februari': ['sum','mean', 'max', 'min'], 
+# 'Kökssvinn(i kg) mars':['sum','mean', 'max','min'], 'Kökssvinn(i kg) april':['sum','mean', 'max','min']})
+# matsvinn_keys[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari', 'Kökssvinn(i kg) mars', 'Kökssvinn(i kg) april']] = matsvinn_keys[['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari','Kökssvinn(i kg) mars','Kökssvinn(i kg) april']].round(2).astype(float)   #kor INT typ pa allt
 
-merging_data = matsvinn_keys.melt(id_vars=['index'], 
-value_vars=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari', 'Kökssvinn(i kg) mars', 'Kökssvinn(i kg) april'],
-var_name='Månad',
-value_name='Kökssvinn (kg)')
-merging_data.columns=['Aggregat_typ', 'Månad', 'Kökssvinn (kg)']
-print(merging_data)
+# print(matsvinn_keys)  #tycker det ar bra med avrundning, men behovs ej egentligen
 
 
-#______________________________BETTER SCATTERPLOT (BUBBLES)________________________________________
-sns.scatterplot(x='Månad', y='Kökssvinn (kg)', hue='Aggregat_typ', size='Kökssvinn (kg)', sizes=(30, 180), data=merging_data)
+# #forbereder mina nya data for plotting enligt chatGPT visdom (skulle jag soka syntax sjalv skulle det ta 1 ar att gora detta):
 
-plt.title('Matsvinn Sodertalje forskolor_better_scatterplot')
-plt.xlabel('Månad')
-plt.ylabel('Kökssvinn (i kg)')
-plt.show()
+# matsvinn_keys = matsvinn_keys.reset_index()
 
-#___________________________________HEATMAP____________________________________________________________
-Data_graph_3 = merging_data.pivot(index='Månad', columns='Aggregat_typ', values='Kökssvinn (kg)')
-
-sns.heatmap(Data_graph_3, annot=True, cmap='YlGnBu', fmt=".2f", linewidths=1)
-plt.title('Matsvinn Sodertalje forskolor')
-plt.xlabel('Aggregat_typ')
-plt.ylabel('Månad')
-plt.show()
+# merging_data = matsvinn_keys.melt(id_vars=['index'], 
+# value_vars=['Kökssvinn(i kg) januari', 'Kökssvinn(i kg) februari', 'Kökssvinn(i kg) mars', 'Kökssvinn(i kg) april'],
+# var_name='Månad',
+# value_name='Kökssvinn (kg)')
+# merging_data.columns=['Aggregat_typ', 'Månad', 'Kökssvinn (kg)']
+# print(merging_data)
 
 
+# #______________________________BETTER SCATTERPLOT (BUBBLES)________________________________________
+# sns.scatterplot(x='Månad', y='Kökssvinn (kg)', hue='Aggregat_typ', size='Kökssvinn (kg)', sizes=(30, 180), data=merging_data)
 
-# merging_data.to_csv('Arbete_med_flera_kolumner.csv', index=False) 
-data_graph_1.to_excel('Dataframe_1.xlsx', index=False)
-# #data_graph_2.to_excel('Dataframe 2.xlsx', index=False)
-# Data_graph_3.to_excel('Arbete_med_flera_kolumner_2.xlsx, index=False)
-# #lagom_utveck.to_excel('Dataframe_3.xlsx', index=False)
+# plt.title('Matsvinn Sodertalje forskolor_better_scatterplot')
+# plt.xlabel('Månad')
+# plt.ylabel('Kökssvinn (i kg)')
+# plt.show()
+
+# #___________________________________HEATMAP____________________________________________________________
+# Data_graph_3 = merging_data.pivot(index='Månad', columns='Aggregat_typ', values='Kökssvinn (kg)')
+
+# sns.heatmap(Data_graph_3, annot=True, cmap='YlGnBu', fmt=".2f", linewidths=1)
+# plt.title('Matsvinn Sodertalje forskolor')
+# plt.xlabel('Aggregat_typ')
+# plt.ylabel('Månad')
+# plt.show()
 
 
 
-#UTVARDERING:
+# # merging_data.to_csv('Arbete_med_flera_kolumner.csv', index=False) 
+# data_graph_1.to_excel('Dataframe_1.xlsx', index=False)
+# # #data_graph_2.to_excel('Dataframe 2.xlsx', index=False)
+# # Data_graph_3.to_excel('Arbete_med_flera_kolumner_2.xlsx, index=False)
+# # #lagom_utveck.to_excel('Dataframe_3.xlsx', index=False)
 
-'''
-I had well ordered data to work with, which could result in nice graphs. 
-I downloaded and merged different files to allow a comparison over time, which was the easiest and most valuable operation to do with those data. 
-I had difficult to sort out the most important insights, reason being that data which would allow a more
-objective analysis was in fact missing -as exempel, amount of children/forskola, amount of days open each month, children presence each month, food catering or not:
-things which may have explained the variation/
-'''
+
+
+# #UTVARDERING:
+
+# '''
+# I had well ordered data to work with, which could result in nice graphs. 
+# I downloaded and merged different files to allow a comparison over time, which was the easiest and most valuable operation to do with those data. 
+# I had difficult to sort out the most important insights, reason being that data which would allow a more
+# objective analysis was in fact missing -as exempel, amount of children/forskola, amount of days open each month, children presence each month, food catering or not:
+# things which would have explained the  reason of the variation over time, but we did not have them
+# '''
