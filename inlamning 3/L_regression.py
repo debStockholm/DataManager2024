@@ -1,99 +1,84 @@
 import numpy as np
 from sklearn import linear_model
-#from sklearn.cluster import KMeans
 import pandas as pd
 import matplotlib.pyplot as plt 
 from sklearn.linear_model import LinearRegression
 
-df = pd.read_excel('inlamning 3\Df for LR and Cluster.xlsx')
- #print(df)
 
+
+df = pd.read_excel('inlamning 3\Df for LR and Cluster.xlsx')
 df_drop=df.dropna()
-df_drop_1=df_drop.rename(columns={'Kökssvinn(i kg) januari': 'jan_kg', 'Kökssvinn(i kg) februari': 'feb_kg' , 'Kökssvinn(i kg) mars': 'mars_kg', 'Kökssvinn(i kg) april':'apr_kg'})
+df_drop_1=df.rename(columns={'Kökssvinn(i kg) januari': 'jan_kg', 'Kökssvinn(i kg) februari': 'feb_kg' , 'Kökssvinn(i kg) mars': 'mars_kg', 'Kökssvinn(i kg) april':'apr_kg'})
 print(df_drop_1)
 
 
-df_drop_1[['%_jan_feb', '%_feb_mars', '%_mars_april']] = df_drop_1[['jan_kg', 'feb_kg', 'mars_kg', 'apr_kg']].pct_change(axis=1).iloc[:, 1:] * 100
-#print(df_drop_1)
-df_drop_1['Medel %'] = df_drop_1[['%_jan_feb', '%_feb_mars', '%_mars_april']].mean(axis=1)
-df_drop_1[['%_jan_feb', '%_feb_mars', '%_mars_april', 'Medel %']] = df_drop_1[['%_jan_feb', '%_feb_mars', '%_mars_april', 'Medel %']].astype(int)
-#print(df_drop_1)   #jag vill ha allt INT
+#vill arbeta med MEDELVARDET som ser mer linjar ut, men kan arbeta med vad som helst av alla varde:
+matsvinn_keyvalues=df_drop_1[['jan_kg','feb_kg','mars_kg', 'apr_kg'] ].agg('medel')
+print(matsvinn_keyvalues)
 
-ny_df= df_drop_1.sort_values(by ='Medel %', axis = 0, ascending= True)
-#print(ny_df)
+x_idx = matsvinn_keyvalues.index.tolist()
+x = [[i] for i in range(len(x_idx))]   
+y = matsvinn_keyvalues.values.tolist()   
+#print(x)
 
-#ALTERNATIV 1: om jag kor en LR vill jag nog ha de varderna som tillater mig gora det mest akkurata prediction. Jag tycker det ar rimligt
-#att valja de forskolor som had en totalt medelforandring mellan -/+ 10% som betyder att de har en nagorlunda linjar utveckling
+linear_data=linear_model.LinearRegression()
+linear_data.fit(x,y)
 
-#ALTERNATIV 2: anvander aggragat data som samlar info for samtliga forskolor och forsoker forutse utvecklingen  t.e. medelvarde av svinn
+x_axis = [[i] for i in range(-2, len(x) + 2)] #2 manader innan och 2 till
 
-
-
-#______________________ALTERNATIV 1____________________________________
-df_LR= ny_df.loc[(ny_df['Medel %'] >= -10) & (ny_df['Medel %'] <=10)]
-print(df_LR)  #yep!
-
-# df_LR['maj_kg'] = None #?
+predic_on_y = linear_data.predict(x_axis)
 
 
-model_LR = linear_model.LinearRegression()
+months=('nov', 'dec','jan', 'feb', 'mars', 'apr', 'maj', 'juni')
 
-x=df_LR[['mars_kg']]
-y=df_LR[['apr_kg']]
-model_LR.fit(x, y)  #mitt mal har inga varden?
-y_pred=model_LR.predict(x)
-
-
-#df_LR['maj_kg']=y_pred
-#print(model_LR)
-
-
-plt.scatter(x, y, c ='blue')
-plt.plot(x, y_pred, c = 'green')
-plt.title('regression example')
-plt.xlabel('matsvinn jan')
-plt.ylabel('matsvinn feb')
+plt.scatter(x, y, c ='purple')
+plt.plot(x_axis, predic_on_y, c = 'orange')
+plt.title('Matsvinn Sodertalje forskolor ar 2023')
+plt.xlabel('manader')
+plt.ylabel('summa matsvinn bland samtliga forskolor')
+plt.xticks(range(-2, len(x) + 2), months)
 plt.show()
-# # plt.xticks(range)  #tillagg manader manuellt?
-
-#vill arbeta med medelvarde som ser mer linjar ut, men kan arbeta med vad som helst av alla varde
-
-# matsvinn_keyvalues=df_drop_1[['jan_kg','feb_kg','mars_kg', 'apr_kg'] ].round(2).agg('mean')
-# matsvinn_keyvalues['Medel']=matsvinn_keyvalues.mean()
-# print(matsvinn_keyvalues)
-
-# x_idx = matsvinn_keyvalues.index.tolist()
-# x = [[i] for i in range(len(x_idx))]   
-# y = matsvinn_keyvalues.values.tolist()   
-#jag har denna losning i varsta fall, men det galler medelvardet av alla rader... funkar dock.
-# print(x)s
-
-
-# #regression import
-
-# # linear_data=linear_model.LinearRegression()
-# # linear_data.fit(x,y)
-
-# # x_axis = [[i] for i in range(len(x) + 3)] + 2: 2 manader till
-# # predic_on_y = linear_data.predict(x_axis)
 
 
 
-# plt.scatter(x,y, c ='blue')
-# plt.plot(x_axis, predic_on_y, c = 'green')
-# plt.title('regression example')
-# # plt.xlabel
-# # plt.ylabel
-# # plt.xticks(range)  #tillagg manader manuellt?
+#man kan arbeta med max varde ocksa,for att testa:
 
-# index_x = index()  #behover jag visserligen assign a index sa att programmet borjar rakna pa 'januari' och inte 'enhet'?
-# X = np.array([[4.3], [4.5], [3.5], [3.0]])
-# print(X)
+# months_1=('nov', 'dec','jan', 'feb', 'mars', 'apr', 'maj', 'juni')
 
-# y = np.dot(X, np.array('jan_kg', 'feb_kg', 'mars_kg','apr_kg']))
+# plt.scatter(x,y, c ='red')
+# plt.plot(x_max, y_pred, c = 'cyan')
+# plt.title('Matsvinn Sodertalje forskolor ar 2023')
+# plt.xlabel('manader')
+# plt.ylabel('sum matsvinn bland samtliga forskolor')
+# plt.xticks(range(-2, len(x) + 2), months_1)
+# plt.show()
 
-# reg = LinearRegression().fit(X, y)
-# reg.score(X, y)
+#print(x)
+                                                                
 
-# reg.predict(np.array([[5]]))
 
+#jag har aktuell data fran maj, da jag kan kora en double check. Fragan ar: inner eller outer? 
+
+df2_com= pd.read_csv('Inlamning2\Rapportering svinn förskola maj.csv')
+#print(df2_com)
+merge_check=pd.merge(df_drop_1, df2_com , on = 'Enhet', how ='inner' )
+#print(merge_check)
+mean_check= merge_check[['jan_kg','feb_kg','mars_kg', 'apr_kg', 'Kökssvinn  (i kg)'] ].agg('medel')
+#mean_check= merge_check[['jan_kg','feb_kg','mars_kg', 'apr_kg', 'Kökssvinn  (i kg)'] ].agg('sum')
+print(mean_check)
+
+#enligt medel, ar medelsvinnet for MAJ ca 9.57kg - med dropna
+#i LR grafen: ca 9.31kg
+#enligt medel, ar medelsvinnet  i MAJ 10.40kg - utan dropna
+#i LR grafen: 10.7kg
+
+#enlig max varde, ar max varden i matsvinn for MAJ ca 31.5kg - med dropna ohch utan dropna
+#i LR grafen: ca 38kg
+
+#enlig min varde, ar min varden i matsvinn for MAJ ca 0.8kg - utan dropna och med dropna
+#i LR grafen: ca 1.1kg
+
+#enligt sum varde, ar sum varden i matsvinn for MAJ ca 258.5 kg  - med dropna
+#i LR grafen: ca 270kg
+#enligt sum varde, ar sum varden i matsvinn for MAJ ca 440 kg  - utan dropna
+#i LR grafen: ca 456kg
