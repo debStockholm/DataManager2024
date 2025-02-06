@@ -40,7 +40,7 @@ df = pd.DataFrame(df)
 ex. 2020-2023 data predicts 2024, 2020 till 2024 data predicts 2025.
 Rekursiv LR. 
 Fick hjalp av AI, och inte ens med det var det enkelt att fa fram resultat, 
-jag fick fixa grundlig data sjalv for att det skulle bli korrekt:
+jag fick fixa grundliga data sjalv for att det skulle bli korrekt:
 '''
 
 # Function to recursively fill missing years with linear regression  - 
@@ -90,38 +90,6 @@ Ny_df['2026'] = Ny_df['2026'].astype(int)
 print(Ny_df)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# df_graf = merge_months.melt(id_vars=['Manad'], value_vars=['Tot matsvinn 2020', 'Tot matsvinn 2021', 'Tot matsvinn 2022', 'Tot matsvinn 2023'],
-#                     var_name='Ar', value_name='Total matsvinn jan-apr under aret')
-
-# sns.lineplot(x='Manad', y='Total matsvinn jan-apr under aret', hue='Ar', data=df_graf)
-# sns.scatterplot(x='Manad', y='Total matsvinn jan-apr under aret', hue='Ar', legend=False, data=df_graf)
-# plt.title('Total matsvinn per manad')
-# plt.xlabel('Manad')
-# plt.ylabel('Total matsvinn i kg')
-# plt.legend(loc='center right')
-# plt.show()
-
-
-
 plt.figure(figsize=(10, 6))
 colors = sns.color_palette("tab10", len(Ny_df))  # tab10 is a good default color palette
 for index, row in Ny_df.iterrows():
@@ -132,11 +100,11 @@ for index, row in Ny_df.iterrows():
     # Plotting 2024-2026 as dashed lines:korrket
     plt.plot([2023, 2024, 2025, 2026], row[['2023', '2024', '2025', '2026']], color=color, linestyle='--', marker='x')
 
-
-
 plt.xlabel('Ar')
 plt.ylabel('Matsvinn i kg')
 plt.title('Forutspa framtidens matsvinn 2024-2026')
 plt.legend(title="Manader", loc='center right')
 plt.grid(True)
 plt.show()
+
+Ny_df.to_csv('Predictions 2024-2026.csv', index=False)
